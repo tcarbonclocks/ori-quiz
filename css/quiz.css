@@ -1,0 +1,12 @@
+/* Plaats je CSS-code in dit bestand */
+
+nav {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.page {
+    border-width: 1px;
+    border-color: darkblue;
+    border-style: solid;
+}
