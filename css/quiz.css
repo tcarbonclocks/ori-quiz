@@ -7,6 +7,10 @@ nav {
 
 .page {
     border-width: 1px;
-    border-color: darkblue;
+    border-color: red;
     border-style: solid;
+}
+
+#button-start {
+    font-weight: bold;
 }

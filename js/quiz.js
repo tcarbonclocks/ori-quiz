@@ -49,7 +49,7 @@ function showQuestionsPage() {
 
     page.style.display = 'block';
 
-    console.info('Je bent nu op de vragenpagina');
+    window.alert('Je bent nu op de vragenpagina');
 }
 
 // Initialize
