@@ -1,5 +1,5 @@
 /* Plaats je CSS-code in dit bestand */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Lora:700|Noto+Sans');
 
 nav {
     /* margin-top: 1em; */
@@ -41,12 +41,13 @@ body {
     /* background-color:#001f3f; */
     background-image: linear-gradient(#05386b, #111111);
     color: #DDDDDD;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     max-width: 800px;
     margin: auto;
 }
 
 .title {
+    font-family: 'Lora', serif;
     background-color: #1111117a;
     border-width: 1px;
     border-color: #DDDDDD;
