@@ -4,14 +4,14 @@
 nav {
     /* margin-top: 1em; */
     /* margin-bottom: 1em; */
-    background-color: #111111;
+    background-color: #1111117a;
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
 }
 
 .page {
-    background-color: #111111;
+    background-color: #1111117a;
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
@@ -23,7 +23,7 @@ nav {
 }
 
 .block {
-    background-color: #111111;
+    background-color: #1111117a;
     border: none;
     color: #DDDDDD;
     padding: 14px 28px;
@@ -47,7 +47,7 @@ body {
 }
 
 .title {
-    background-color: #111111;
+    background-color: #1111117a;
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
