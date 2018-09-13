@@ -21,6 +21,16 @@ nav {
     font-weight: bold;
 }
 
+.block {
+    background-color: #111111;
+    border: none;
+    color: #DDDDDD;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
 /* Wat eigen veranderingen aan alles aangebracht. */
 body {
     background-color:#001f3f;
