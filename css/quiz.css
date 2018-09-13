@@ -33,7 +33,8 @@ nav {
 
 /* Wat eigen veranderingen aan alles aangebracht. */
 body {
-    background-color:#001f3f;
+    /* background-color:#001f3f; */
+    background-image: url("background.jpg");
     color: #DDDDDD;
     font-family: 'Roboto', sans-serif;
     max-width: 800px;
