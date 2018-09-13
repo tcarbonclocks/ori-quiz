@@ -21,6 +21,6 @@ body {
     background-color: #001f3f;
     color: #DDDDDD;
     font-family: 'Roboto', sans-serif;
-    width: 800px;
+    max-width: 800px;
     margin: auto;
 }
