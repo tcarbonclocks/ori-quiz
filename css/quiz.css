@@ -7,7 +7,7 @@ nav {
 }
 
 .page {
-    border-width: 1px;
+    border-width: 4px;
     border-color: purple;
     border-style: solid;
 }
@@ -16,7 +16,7 @@ nav {
     font-weight: bold;
 }
 
-/* De beste kleur. */
+/* Wat eigen veranderingen aan alles aangebracht. */
 body {
     background-color: #001f3f;
     color: #DDDDDD;
