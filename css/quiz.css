@@ -1,4 +1,5 @@
 /* Plaats je CSS-code in dit bestand */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 nav {
     margin-top: 1em;
@@ -18,5 +19,6 @@ nav {
 /* De beste kleur. */
 body {
     background-color: #001f3f;
-    color: white
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
