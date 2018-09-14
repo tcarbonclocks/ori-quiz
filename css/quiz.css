@@ -10,7 +10,7 @@ nav {
     border-style: solid;
 }
 
-.page {
+.page  {
     background-color: #1111117a;
     border-width: 1px;
     border-color: #DDDDDD;
@@ -27,14 +27,20 @@ nav {
     background-color: transparent;
     border: none;
     color: #DDDDDD;
-    padding: 14px 28px;
+    padding: 1em 1em;
     font-size: 16px;
     cursor: pointer;
     text-align: center;
 }
 
+/*
+De volgende lijnen lossen twee problemen op. 
+1. De achtergrond van de blokken rendert niet na scrollen op mijn telefoon (doordat ik 'height' gebruikte ipv 'min-height'.
+2. De achtergrond van de pagina rendert niet na een stukje.
+https://stackoverflow.com/questions/14963393/my-body-background-color-disappears-when-scrolling
+*/
 html {
-    height: 100%
+    min-height: 100%
 }
 
 /* Wat eigen veranderingen aan alles aangebracht. */
