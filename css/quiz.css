@@ -4,14 +4,16 @@
 nav {
     /* margin-top: 1em; */
     /* margin-bottom: 1em; */
-    background-color: #1111117a;
+    /* background-color: #1111117a; */
+    background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
 }
 
 .page  {
-    background-color: #1111117a;
+    /* background-color: #1111117a; */
+    background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
@@ -55,7 +57,8 @@ body {
 
 .title {
     font-family: 'Lora', serif;
-    background-color: #1111117a;
+    /* background-color: #1111117a; */
+    background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
