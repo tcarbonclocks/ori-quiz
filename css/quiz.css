@@ -23,7 +23,8 @@ nav {
 }
 
 .block {
-    background-color: #1111117a;
+    /* background-color: #1111117a; */
+    background-color: transparent;
     border: none;
     color: #DDDDDD;
     padding: 14px 28px;
