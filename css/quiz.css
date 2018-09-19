@@ -1,31 +1,47 @@
 /* Plaats je CSS-code in dit bestand */
+
+/* Ik vond deze twee lettertypes gewoon leuk er uit zien */
 @import url('https://fonts.googleapis.com/css?family=Lora:700|Noto+Sans');
 
+
+/*
+Zorgt ervoor dat mijn achtergrond op de hele pagina komt.
+Als ik height gebruik ipv min-height, gebeurt dit: https://stackoverflow.com/questions/14963393/my-body-background-color-disappears-when-scrolling
+*/
+html {
+    min-height: 100%
+}
+
+/* Deze CSS zorgt voor mijn achtergrond, algemene lettertype, tekstkleur en geeft wat ruimte aan de zijkanten voor leesbaarheid. */
+body {
+    background-image: linear-gradient(#05386b, #111111);
+    color: #DDDDDD;
+    font-family: 'Noto Sans', sans-serif;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Deze CSS is voor de titel. */
+.title {
+    font-family: 'Lora', serif;
+    background-color: rgba(17, 17, 17, .5);
+    border-width: 1px;
+    border-color: #DDDDDD;
+    border-style: solid;
+    text-align: center;
+    margin-top: 1em;
+}
+
+/* Deze CSS is voor het navigatiegedeelte. */
 nav {
-    /* margin-top: 1em; */
-    /* margin-bottom: 1em; */
-    /* background-color: #1111117a; */
     background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
 }
 
-.page  {
-    /* background-color: #1111117a; */
-    background-color: rgba(17, 17, 17, .5);
-    border-width: 1px;
-    border-color: #DDDDDD;
-    border-style: solid;
-    padding: 1em;
-}
-
-#button-start {
-    font-weight: bold;
-}
-
-.block {
-    /* background-color: #1111117a; */
+/* Deze CSS is voor de knoppen in het navigatiegedelte. */
+.nav-button {
     background-color: transparent;
     border: none;
     color: #DDDDDD;
@@ -35,33 +51,11 @@ nav {
     text-align: center;
 }
 
-/*
-De volgende lijnen lossen twee problemen op. 
-1. De achtergrond van de blokken rendert niet na scrollen op mijn telefoon (doordat ik 'height' gebruikte ipv 'min-height'.
-2. De achtergrond van de pagina rendert niet na een stukje.
-https://stackoverflow.com/questions/14963393/my-body-background-color-disappears-when-scrolling
-*/
-html {
-    min-height: 100%
-}
-
-/* Wat eigen veranderingen aan alles aangebracht. */
-body {
-    /* background-color:#001f3f; */
-    background-image: linear-gradient(#05386b, #111111);
-    color: #DDDDDD;
-    font-family: 'Noto Sans', sans-serif;
-    max-width: 800px;
-    margin: auto;
-}
-
-.title {
-    font-family: 'Lora', serif;
-    /* background-color: #1111117a; */
+/* Deze CSS is voor het paginagedeelte. */
+.page  {
     background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
-    text-align: center;
-    margin-top: 1em;
+    padding: 1em;
 }
