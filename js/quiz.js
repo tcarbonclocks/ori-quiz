@@ -1,11 +1,11 @@
 "use strict"
 
 function boldButton(btn) {
-   var startButton = document.getElementById('button-start');
-   var questionsButton = document.getElementById('button-questions');
-
-   startButton.style.fontWeight = 'normal';
-   questionsButton.style.fontWeight = 'normal';
+    var navButtons = document.getElementsByClassName('nav-button');
+    for (var i = 0; i < navButtons.length; ++i) {
+        var item = navButtons[i];
+        item.style.fontWeight = 'normal';
+    }
 
    btn.style.fontWeight = 'bold' ;
 }
