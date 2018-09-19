@@ -1,5 +1,15 @@
 "use strict"
 
+function boldButton(btn) {
+   var startButton = document.getElementById('button-start');
+   var questionsButton = document.getElementById('button-questions');
+
+   startButton.style.fontWeight = 'normal';
+   questionsButton.style.fontWeight = 'normal';
+
+   btn.style.fontWeight = 'bold' ;
+}
+
 /**
  * Add actions to page buttons 
  */
@@ -9,9 +19,11 @@ function addButtonActions() {
 
     startButton.addEventListener("click", function () {
         showStartPage();
+        boldButton(startButton);
     });
     questionsButton.addEventListener("click", function () {
         showQuestionsPage();
+        boldButton(questionsButton);
     });
 }
 
@@ -49,9 +61,10 @@ function showQuestionsPage() {
 
     page.style.display = 'block';
 
-    window.alert('Je bent nu op de vragenpagina');
+    console.info('Je bent nu op de vragenpagina');
 }
 
 // Initialize
 addButtonActions();
 showStartPage();
+boldButton(document.getElementById('button-start'));
