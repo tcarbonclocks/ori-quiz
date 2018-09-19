@@ -7,7 +7,7 @@ function boldButton(btn) {
         item.style.fontWeight = 'normal';
     }
 
-   btn.style.fontWeight = 'bold' ;
+    btn.style.fontWeight = 'bold' ;
 }
 
 /**
