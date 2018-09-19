@@ -1,12 +1,17 @@
 "use strict"
 
+/**
+ * Mijn eerste functie: een manier om de knop van de pagina waarop je bent bold te maken.
+ */
 function boldButton(btn) {
+    // De for-loop zorgt ervoor dat beide knoppen eerst normaal worden gemaakt.
     var navButtons = document.getElementsByClassName('nav-button');
     for (var i = 0; i < navButtons.length; ++i) {
         var item = navButtons[i];
         item.style.fontWeight = 'normal';
     }
 
+    // Dit verandert de zelfgekozen knop naar bold.
     btn.style.fontWeight = 'bold' ;
 }
 
