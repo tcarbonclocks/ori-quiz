@@ -31,6 +31,14 @@ const quizVragen = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij als "true" of "false".
 
+// Dit is om de transparency van het scorebord te veranderen als je scrollt.
+window.addEventListener('scroll', function () {
+    document.body.classList[
+        window.scrollY > 200 ? 'add': 'remove'
+    ]('scrolled');
+});
+  
+
 /**
  * Deze functie telt het aantal juiste antwoorden. Dit heb ik later nodig.
  */

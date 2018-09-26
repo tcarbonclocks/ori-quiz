@@ -48,7 +48,7 @@ nav {
 
 /* Deze CSS is voor de score. */
 .score {
-    background-color: rgb(17, 17, 17);
+    background-color: rgba(17, 17, 17, .5);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
@@ -57,6 +57,11 @@ nav {
     padding: 0 1em 0 1em;
     position: sticky;
     top: 0; 
+    transition: background-color .2s;
+}
+
+body.scrolled .score {
+    background-color: rgba(17, 17, 17, 1); 
 }
 
 /* Deze CSS is voor de knoppen in het navigatiegedelte. */
