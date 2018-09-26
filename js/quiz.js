@@ -126,6 +126,9 @@ function showQuestionsPage() {
     console.info('Je bent nu op de vragenpagina');
 }
 
+/**
+ * Deze functie laat de vraag zien in de vragenpagina.
+ */
 function showQuestion(num) {
     var questionTitle = document.getElementById("question-title");
     var question = document.getElementById("question");
@@ -144,13 +147,16 @@ function showQuestion(num) {
     answerButtonD.innerHTML = "d. " + quizVragen[num].antwoorden.d;
 };
 
+/**
+ * Deze functie definieert wat er gebeurt als je op een van de knoppen drukt.
+ */
 function answerPressed(answer) {
     var correct = quizVragen[vraagNummer].correcteAntwoord;
     if (answer == correct) {
-        window.alert("Het antwoord is correct! 👍");
+        window.alert("Goed! 👍 Het antwoord is " + correct + ': "' + quizVragen[vraagNummer].antwoorden[correct] + '"');
         antwoorden.push(true);
     } else {
-        window.alert("Fout. Het juiste antwoord is " + correct + ': "' + quizVragen[vraagNummer].antwoorden[correct] + '"');
+        window.alert("Fout. 👎 Het juiste antwoord is " + correct + ': "' + quizVragen[vraagNummer].antwoorden[correct] + '"');
         antwoorden.push(false);
     };
     vraagNummer = vraagNummer + 1;
