@@ -122,6 +122,7 @@ function showQuestionsPage() {
 
     page.style.display = 'block';
     showQuestion(vraagNummer)
+    points()
 
     console.info('Je bent nu op de vragenpagina');
 }
@@ -147,6 +148,15 @@ function showQuestion(num) {
     answerButtonD.innerHTML = "d. " + quizVragen[num].antwoorden.d;
 };
 
+function points() {
+    var scoreCounter = document.getElementById("score-counter");
+    var score = countTrue(antwoorden);
+    var total = quizVragen.length;
+
+    scoreCounter.innerHTML = score + " van de " + total + " punten.";
+};
+
+
 /**
  * Deze functie definieert wat er gebeurt als je op een van de knoppen drukt.
  */
@@ -166,6 +176,7 @@ function answerPressed(answer) {
     } else {
         showQuestionsPage(vraagNummer)
     }
+    points()
 };
 
 // Initialize

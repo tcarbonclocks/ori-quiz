@@ -46,12 +46,25 @@ nav {
     border-style: solid;
 }
 
+/* Deze CSS is voor de score. */
+.score {
+    background-color: rgb(17, 17, 17);
+    border-width: 1px;
+    border-color: #DDDDDD;
+    border-style: solid;
+    color: #DDDDDD;
+    font-size: 16px;
+    padding: 0 1em 0 1em;
+    position: sticky;
+    top: 0; 
+}
+
 /* Deze CSS is voor de knoppen in het navigatiegedelte. */
 .nav-button {
     background-color: transparent;
     border: none;
     color: #DDDDDD;
-    padding: 1em 1em;
+    padding: 1em 1em 1em 1em;
     font-size: 16px;
     cursor: pointer;
     text-align: center;
