@@ -74,8 +74,8 @@ nav {
 
 /* Stijl voor de antwoordknoppen */
 .answer-button {
-    display: inline-block;
-    min-width: 50px;
+    display: block;
+    width: 300px;
     color: #DDDDDD;
     padding: 1em 1em;
     cursor: pointer;
@@ -85,4 +85,10 @@ nav {
     border-width: 1px;
     border-style: solid;
     font-weight: bold;
+}
+
+#question-extras img {
+    width: 300px;
+    max-height: 100%;
+    max-width: 100%;
 }
