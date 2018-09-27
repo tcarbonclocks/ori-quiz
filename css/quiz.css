@@ -73,11 +73,11 @@ body.scrolled .score {
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.5s;
+    transition: background-color 0.2s;
 }
 
 .nav-button:hover {
-    background-color: rgba(17, 17, 17, .9);
+    background-color: rgb(17, 17, 17);
 }
 
 /* Deze CSS is voor het paginagedeelte. */
@@ -98,11 +98,16 @@ body.scrolled .score {
     padding: 1em 1em;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.5s;
+    transition: background-color 0.2s;
     background-color: transparent;
     border-width: 1px;
     border-style: solid;
     font-weight: bold;
+}
+
+.answer-button:hover {
+    /* background-color: #05386b; */
+    background-color: rgb(17, 17, 17);
 }
 
 #question-extras img {
