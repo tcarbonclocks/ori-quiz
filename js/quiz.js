@@ -16,6 +16,17 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "a"
     },
     {
+        vraag: "Hoe maak je een lijst met nummers in het begin?",
+        antwoorden: {
+            a: "&#x3C;bl&#x3E;",
+            b: "&#x3C;ol&#x3E;",
+            c: "&#x3C;ul&#x3E;",
+            d: "&#x3C;al&#x3E;"
+        },
+        extra: "<img src=pictures/numberedlist.png>",
+        correcteAntwoord: "b"
+    },
+    {
         vraag: "TESTVRAAG",
         antwoorden: {
             a: "TEST A",
@@ -23,22 +34,15 @@ const QUIZ_VRAGEN = [
             c: "TEST C voor CORRECT",
             d: "TEST D"
         },
-        extra: '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+        extra: '<iframe src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
         correcteAntwoord: "c"
-    }
+    },
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
 
-// Dit is om de transparency van het scorebord te veranderen als je scrollt.
-window.addEventListener('scroll', function () {
-    document.body.classList[
-        window.scrollY > 200 ? 'add': 'remove'
-    ]('scrolled');
-});
-  
 
 /**
  * Deze functie telt het aantal juiste antwoorden. Dit heb ik later nodig.
@@ -50,17 +54,20 @@ function countTrue(array) {
 };
 
 /**
+ * Deze functie maakt alle knoppen niet-bold.
+ */
+function unBoldAllButtons() {
+    var navButtons = document.getElementsByClassName('nav-button');
+        for (var i = 0; i < navButtons.length; ++i) {
+            var item = navButtons[i];
+            item.style.fontWeight = 'normal';
+        }
+}
+
+/**
  * Deze functie maakt de navigatieknoppen bold op basis van op welke pagina je bent.
  */
 function boldButton(btn) {
-    // De for-loop zorgt ervoor dat beide knoppen eerst normaal worden gemaakt.
-    var navButtons = document.getElementsByClassName('nav-button');
-    for (var i = 0; i < navButtons.length; ++i) {
-        var item = navButtons[i];
-        item.style.fontWeight = 'normal';
-    }
-
-    // Dit verandert de zelfgekozen knop naar bold.
     btn.style.fontWeight = 'bold' ;
 }
 
@@ -77,11 +84,9 @@ function addButtonActions() {
 
     startButton.addEventListener("click", function () {
         showStartPage();
-        boldButton(startButton);
     });
     questionsButton.addEventListener("click", function () {
         showQuestionsPage();
-        boldButton(questionsButton);
     });
     answerButtonA.addEventListener("click", function () {
         answerPressed("a")
@@ -98,14 +103,18 @@ function addButtonActions() {
 };
 
 /**
- * Hide all pages
+ * Hide all pages and the score bar
  */
 function hideAllPages() {
     var startPage = document.getElementById('page-start');
     var questionsPage = document.getElementById('page-questions');
+    var endPage = document.getElementById('page-end');
+    var scoreBar = document.getElementById('scorebar');
 
     startPage.style.display = 'none';   
     questionsPage.style.display = 'none';
+    endPage.style.display = 'none';
+    scoreBar.style.display = 'none';
 }
 
 /**
@@ -113,10 +122,13 @@ function hideAllPages() {
  */
 function showStartPage() {
     var page = document.getElementById('page-start');
+    var startButton = document.getElementById('button-start');
     
     hideAllPages();
 
     page.style.display = 'block';
+    unBoldAllButtons();
+    boldButton(startButton);
 
     console.info('Je bent nu op de startpagina');
 }
@@ -126,14 +138,47 @@ function showStartPage() {
  */
 function showQuestionsPage() {
     var page = document.getElementById('page-questions');
+    var scoreBar = document.getElementById('scorebar');
+    var questionsButton = document.getElementById('button-questions');
     
     hideAllPages();
 
     page.style.display = 'block';
+    scoreBar.style.display = 'block';
+    unBoldAllButtons();
+    boldButton(questionsButton);
     showQuestion(vraagNummer)
     points()
 
     console.info('Je bent nu op de vragenpagina');
+}
+
+
+function showEndPage() {
+    var page = document.getElementById('page-end');
+    var navBar = document.getElementById('nav-bar');
+
+    var endScore = document.getElementById('end-score');
+    var endResult = document.getElementById('end-result');
+
+    var score = countTrue(isCorrect);
+    var total = QUIZ_VRAGEN.length;
+
+    hideAllPages();
+
+    navBar.style.display = 'none';
+    page.style.display = 'block';
+
+    endScore.innerHTML = "Je hebt in totaal " + score + " vragen van de " + total + " goed beantwoord.";
+    if (score == total) {
+        endResult.innerHTML = "Je hebt alles goed 🤯. Goed zo!";
+    } else if ((score / total) >= 0.5) {
+        endResult.innerHTML = "Je hebt (meer dan) de helft goed 😃. Voldoende.";
+    } else {
+        endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed."
+    }
+
+    console.info('Je bent nu op de eindpagina van de quiz.');
 }
 
 /**
@@ -162,7 +207,7 @@ function points() {
     var score = countTrue(isCorrect);
     var total = QUIZ_VRAGEN.length;
 
-    scoreCounter.innerHTML = score + " van de " + total + " punten.";
+    scoreCounter.innerHTML = score + " van de " + total + " punten";
 };
 
 
@@ -182,8 +227,7 @@ function answerPressed(answer) {
     };
     vraagNummer = vraagNummer + 1;
     if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
-        var amountTrue = countTrue(isCorrect); // dit gaat later weg
-        window.alert("TESTING Je bent bij het einde van de quiz en je hebt " + amountTrue + " vraag/vragen goed. Vernieuw de pagina om de quiz opnieuw te proberen."); // Dit gaat later weg
+        showEndPage();
     } else {
         showQuestionsPage(vraagNummer)
     }

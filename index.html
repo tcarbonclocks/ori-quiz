@@ -15,12 +15,12 @@
             <h1>De ORI-quiz</h1>
             <h3>Door: Avinash Badloe</h3>
         </div>
-        <nav>
+        <nav id=nav-bar>
             <button class="nav-button" id="button-start">Start</button>
             <button class="nav-button" id="button-questions">Vragen</button>
         </nav>
-        <div class="score">
-            <p id=score-counter>Hier wordt de score weergegeven.</p>
+        <div class="scorebar" id="scorebar">
+            <p id=score-counter></p>
         </div>
         <main>
             <div class="page" id="page-start">
@@ -50,6 +50,14 @@
                 <button class="answer-button" id="answerC"></button>
                 <button class="answer-button" id="answerD"></button>
             </div>
+
+            <div class="page" id="page-end">
+                <h2>Einde</h2>
+                <p>Je bent bij het einde van de quiz gekomen.</p>
+                <p id="end-score">tset</p>
+                <p id="end-result">tsett</p>
+            </div>
+
         </main>
         <script src="js/quiz.js"></script>
     </body>

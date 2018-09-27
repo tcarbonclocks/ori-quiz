@@ -47,8 +47,8 @@ nav {
 }
 
 /* Deze CSS is voor de score. */
-.score {
-    background-color: rgba(17, 17, 17, .5);
+#scorebar {
+    background-color: rgba(17, 17, 17, 1);
     border-width: 1px;
     border-color: #DDDDDD;
     border-style: solid;
@@ -110,7 +110,7 @@ body.scrolled .score {
     background-color: rgb(17, 17, 17);
 }
 
-#question-extras img {
+#question-extras {
     width: 300px;
     max-height: 100%;
     max-width: 100%;
