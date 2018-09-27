@@ -18,10 +18,10 @@ const QUIZ_VRAGEN = [
     {
         vraag: "Hoe maak je een lijst met nummers in het begin?",
         antwoorden: {
-            a: "&#x3C;bl&#x3E;",
-            b: "&#x3C;ol&#x3E;",
-            c: "&#x3C;ul&#x3E;",
-            d: "&#x3C;al&#x3E;"
+            a: "Met een bl-element",
+            b: "Met een ol-element",
+            c: "Met een ul-element",
+            d: "Met een al-element"
         },
         extra: "<img src=pictures/numberedlist.png>",
         correcteAntwoord: "b"
