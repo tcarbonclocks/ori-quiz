@@ -3,7 +3,7 @@
 /**
  * Deze constante bevat alle vragen van de quiz en is dynamisch uit te breiden.
  */
-const quizVragen = [
+const QUIZ_VRAGEN = [
     {
         vraag: "Het antwoord is 0. Wat is de vraag?", 
         antwoorden: {
@@ -29,7 +29,8 @@ const quizVragen = [
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
-var antwoorden = []; // Deze variabele houdt de antwoorden bij als "true" of "false".
+var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
+var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
 
 // Dit is om de transparency van het scorebord te veranderen als je scrollt.
 window.addEventListener('scroll', function () {
@@ -148,18 +149,18 @@ function showQuestion(num) {
     var answerButtonD = document.getElementById('answerD');
 
     questionTitle.innerHTML = "Vraag " + num;
-    question.innerHTML = quizVragen[num].vraag;
-    questionExtras.innerHTML = quizVragen[num].extra;
-    answerButtonA.innerHTML = "a. " + quizVragen[num].antwoorden.a;
-    answerButtonB.innerHTML = "b. " + quizVragen[num].antwoorden.b;
-    answerButtonC.innerHTML = "c. " + quizVragen[num].antwoorden.c;
-    answerButtonD.innerHTML = "d. " + quizVragen[num].antwoorden.d;
+    question.innerHTML = QUIZ_VRAGEN[num].vraag;
+    questionExtras.innerHTML = QUIZ_VRAGEN[num].extra;
+    answerButtonA.innerHTML = "a. " + QUIZ_VRAGEN[num].antwoorden.a;
+    answerButtonB.innerHTML = "b. " + QUIZ_VRAGEN[num].antwoorden.b;
+    answerButtonC.innerHTML = "c. " + QUIZ_VRAGEN[num].antwoorden.c;
+    answerButtonD.innerHTML = "d. " + QUIZ_VRAGEN[num].antwoorden.d;
 };
 
 function points() {
     var scoreCounter = document.getElementById("score-counter");
-    var score = countTrue(antwoorden);
-    var total = quizVragen.length;
+    var score = countTrue(isCorrect);
+    var total = QUIZ_VRAGEN.length;
 
     scoreCounter.innerHTML = score + " van de " + total + " punten.";
 };
@@ -169,17 +170,19 @@ function points() {
  * Deze functie definieert wat er gebeurt als je op een van de knoppen drukt.
  */
 function answerPressed(answer) {
-    var correct = quizVragen[vraagNummer].correcteAntwoord;
+    var correct = QUIZ_VRAGEN[vraagNummer].correcteAntwoord;
     if (answer == correct) {
-        window.alert("Goed! 👍 Het antwoord is " + correct + ': "' + quizVragen[vraagNummer].antwoorden[correct] + '"');
-        antwoorden.push(true);
+        window.alert("Goed! 👍 Het antwoord is " + correct + ': "' + QUIZ_VRAGEN[vraagNummer].antwoorden[correct] + '"');
+        antwoorden.push(answer)
+        isCorrect.push(true);
     } else {
-        window.alert("Fout. 👎 Het juiste antwoord is " + correct + ': "' + quizVragen[vraagNummer].antwoorden[correct] + '"');
-        antwoorden.push(false);
+        window.alert("Fout. 👎 Het juiste antwoord is " + correct + ': "' + QUIZ_VRAGEN[vraagNummer].antwoorden[correct] + '"');
+        antwoorden.push(answer);
+        isCorrect.push(false);
     };
     vraagNummer = vraagNummer + 1;
-    if (quizVragen[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
-        var amountTrue = countTrue(antwoorden); // dit gaat later weg
+    if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
+        var amountTrue = countTrue(isCorrect); // dit gaat later weg
         window.alert("TESTING Je bent bij het einde van de quiz en je hebt " + amountTrue + " vraag/vragen goed. Vernieuw de pagina om de quiz opnieuw te proberen."); // Dit gaat later weg
     } else {
         showQuestionsPage(vraagNummer)
@@ -191,4 +194,4 @@ function answerPressed(answer) {
 addButtonActions();
 showStartPage();
 boldButton(document.getElementById('button-start'));
-console.log("Misschien werkt het geheime commando... 😉")
+console.info("Misschien werkt het geheime commando... 😉")
