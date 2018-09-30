@@ -27,6 +27,20 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "b"
     },
     {
+        vraag: "Wat is de uitkomst van het onderste stuk code?",
+        antwoorden: {
+            a: "ouden pal",
+            b: "oud",
+            c: "het goup",
+            d: "ouden p"
+        },
+        extra: '<code>\
+            var text = "het gouden paleis";\
+            window.alert(text.substr(5, 7)\
+        </code>',
+        correcteAntwoord: "d"
+    },
+    {
         vraag: "TESTVRAAG",
         antwoorden: {
             a: "TEST A",
