@@ -27,11 +27,11 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "b"
     },
     {
-        vraag: "Wat is de uitkomst van het onderste stuk code?",
+        vraag: "Wat is de uitkomst van het onderste stuk JavaScript-code?",
         antwoorden: {
             a: "ouden pal",
             b: "oud",
-            c: "het goup",
+            c: "het gou",
             d: "ouden p"
         },
         extra: '<code>\
@@ -41,7 +41,7 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "d"
     },
     {
-        vraag: "Wat is de uitkomst van het onderste stuk code?",
+        vraag: "Wat is de uitkomst van het onderste stuk JavaScript-code?",
         antwoorden: {
             a: "true en true",
             b: "true en false",
