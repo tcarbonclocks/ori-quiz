@@ -86,10 +86,10 @@ function countTrue(array) {
  */
 function unBoldAllButtons() {
     var navButtons = document.getElementsByClassName('nav-button');
-        for (var i = 0; i < navButtons.length; ++i) {
-            var item = navButtons[i];
-            item.style.fontWeight = 'normal';
-        }
+    for (var i = 0; i < navButtons.length; ++i) {
+        var item = navButtons[i];
+        item.style.fontWeight = 'normal';
+    }
 }
 
 /**
