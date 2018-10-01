@@ -60,10 +60,6 @@ nav {
     transition: background-color .2s;
 }
 
-body.scrolled .score {
-    background-color: rgba(17, 17, 17, 1); 
-}
-
 /* Deze CSS is voor de knoppen in het navigatiegedelte. */
 .nav-button {
     background-color: transparent;
