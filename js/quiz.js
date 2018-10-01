@@ -41,6 +41,20 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "d"
     },
     {
+        vraag: "Wat is de uitkomst van het onderste stuk code?",
+        antwoorden: {
+            a: "true en true",
+            b: "true en false",
+            c: "false en true",
+            d: "false en false"
+        },
+        extra: '<code>\
+            window.alert(9 == "9")\
+            window.alert(9 === "9")\
+        </code>',
+        correcteAntwoord: "b"
+    },
+    {
         vraag: "TESTVRAAG",
         antwoorden: {
             a: "TEST A",
