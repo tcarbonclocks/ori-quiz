@@ -71,6 +71,64 @@ var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
 var answerButtonClickable;
+var studentInfo;
+
+
+/**
+ * Check student number using the API (copied from US10)
+ */
+function checkStudent(number) {
+    var xHttp = new XMLHttpRequest();
+    xHttp.onreadystatechange = function () {
+        if (xHttp.readyState == XMLHttpRequest.DONE) {
+            var response = JSON.parse(xHttp.response);
+            if (xHttp.status == 200) {
+                studentIdentificationSucces(response);
+            } else {
+                studentIdentificationFailed(response);
+            }
+        }
+    };
+    xHttp.onerror = function () {
+        studentIdentificationFailed(xHttp.statusText);
+    };
+    xHttp.open("GET", "https://quiz.clow.nl/v1/student/" + number, true);
+    xHttp.send();
+}
+
+/**
+ * Student is successfully identified (copied from US10)
+ */
+function studentIdentificationSucces(student) {
+    var loginStatus = document.getElementById('login-status');
+
+    console.info(student); // Een Javascript-object met studentnummer, voornaam en achternaam
+
+    // Schrijf hier de code die uitgevoerd moet worden als het studentnummer klopt
+
+    loginStatus.style.color = "rgb(51, 153, 51)"
+    loginStatus.innerHTML = "Welkom " + student.firstName + " " + student.lastName + ". Veel succes met de quiz.";
+    studentInfo = student;
+
+    setTimeout(function () {
+        showQuestionsPage();
+    }, 3000)
+
+}
+
+/**
+ * Student number is incorrect (copied from US10)
+ */
+function studentIdentificationFailed(errorMessage) {
+    var loginStatus = document.getElementById('login-status');
+    
+    console.error(errorMessage);
+
+    // Schrijf hier de code die uitgevoerd moet worden als het studentnummer NIET klopt
+
+    loginStatus.style.color = "rgb(204, 0, 0)";
+    loginStatus.innerHTML = "Studentnummer onjuist. Probeer het opnieuw.";
+}
 
 
 /**
@@ -105,18 +163,23 @@ function boldButton(btn) {
  */
 function addButtonActions() {
     var startButton = document.getElementById('button-start');
-    var questionsButton = document.getElementById('button-questions');
+    var loginButton = document.getElementById('button-login');
     var answerButtonA = document.getElementById('answerA');
     var answerButtonB = document.getElementById('answerB');
     var answerButtonC = document.getElementById('answerC');
     var answerButtonD = document.getElementById('answerD');
     var nextQuestion = document.getElementById('next-question');
+    var checkButton = document.getElementById('check-number');
+    var studentNumber = document.getElementById('studentnummer');
 
     startButton.addEventListener("click", function () {
         showStartPage();
     });
-    questionsButton.addEventListener("click", function () {
-        showQuestionsPage();
+    loginButton.addEventListener("click", function () {
+        showLoginPage();
+    });
+    checkButton.addEventListener("click", function () {
+        checkStudent(studentNumber.value);
     });
     answerButtonA.addEventListener("click", function () {
         if (answerButtonClickable == true) {
@@ -178,7 +241,22 @@ function showStartPage() {
     boldButton(startButton);
 
     console.info('Je bent nu op de startpagina');
-}
+};
+
+function showLoginPage() {
+    var page = document.getElementById('page-login');
+    var loginButton = document.getElementById('button-login');
+    var navBar = document.getElementById('nav-bar');
+
+    hideAllPages();
+
+    page.style.display = 'block';
+    navBar.style.display = 'block';
+    unBoldAllButtons();
+    boldButton(loginButton);
+
+    console.info('Je bent nu op de loginpagina.')
+};
 
 /**
  * Show questions page
@@ -186,19 +264,17 @@ function showStartPage() {
 function showQuestionsPage() {
     var page = document.getElementById('page-questions');
     var scoreBar = document.getElementById('scorebar');
-    var questionsButton = document.getElementById('button-questions');
     
     hideAllPages();
 
     page.style.display = 'block';
     scoreBar.style.display = 'block';
     unBoldAllButtons();
-    boldButton(questionsButton);
     showQuestion(vraagNummer)
     updateScoreCounter()
 
     console.info('Je bent nu op de vragenpagina');
-}
+};
 
 
 function showEndPage() {
@@ -226,7 +302,7 @@ function showEndPage() {
     }
 
     console.info('Je bent nu op de eindpagina van de quiz.');
-}
+};
 
 /**
  * Deze functie laat de vraag zien in de vragenpagina.
@@ -260,7 +336,8 @@ function updateScoreCounter() {
     var score = countTrue(isCorrect);
     var total = QUIZ_VRAGEN.length;
 
-    scoreCounter.innerHTML = score + " van de " + total + " punten";
+    scoreCounter.innerHTML = score + " van de " + total + " punten, ingelogd als " + studentInfo.firstName + " " + studentInfo.lastName + " ("+ studentInfo.number + ")";
+
 };
 
 
