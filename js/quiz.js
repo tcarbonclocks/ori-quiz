@@ -34,10 +34,10 @@ const QUIZ_VRAGEN = [
             c: "het gou",
             d: "ouden p"
         },
-        extra: '\
-            <code>var text = "het gouden paleis";</code>\
-            <code>window.alert(text.substr(5, 7)</code>\
-        ',
+        extra: '<code>\
+            var text = "het gouden paleis";</br>\
+            window.alert(text.substr(5, 7)\
+        </code>',
         correcteAntwoord: "d"
     },
     {
@@ -48,10 +48,10 @@ const QUIZ_VRAGEN = [
             c: "false en true",
             d: "false en false"
         },
-        extra: '\
-            <code>window.alert(9 == "9");</code>\
-            <code>window.alert(9 === "9")</code>\
-        ',
+        extra: '<code>\
+            window.alert(9 == "9");</br>\
+            window.alert(9 === "9")\
+        </code>',
         correcteAntwoord: "b"
     },
     {
