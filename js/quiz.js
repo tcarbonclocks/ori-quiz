@@ -148,12 +148,14 @@ function addButtonActions() {
  */
 function hideAllPages() {
     var startPage = document.getElementById('page-start');
+    var loginPage = document.getElementById('page-login');
     var questionsPage = document.getElementById('page-questions');
     var endPage = document.getElementById('page-end');
     var scoreBar = document.getElementById('scorebar');
     var navBar  = document.getElementById('nav-bar');
 
     startPage.style.display = 'none';   
+    loginPage.style.display = 'none';
     questionsPage.style.display = 'none';
     endPage.style.display = 'none';
     scoreBar.style.display = 'none';
