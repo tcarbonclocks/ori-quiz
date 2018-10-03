@@ -70,7 +70,7 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
-var answerButtonClickable
+var answerButtonClickable;
 
 
 /**
