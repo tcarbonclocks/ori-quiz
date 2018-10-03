@@ -49,21 +49,21 @@ const QUIZ_VRAGEN = [
             d: "false en false"
         },
         extra: '<code>\
-            window.alert(9 == "9")\
+            window.alert(9 == "9");\
             window.alert(9 === "9")\
         </code>',
         correcteAntwoord: "b"
     },
     {
-        vraag: "TESTVRAAG",
+        vraag: "In welk bestand kan ik de grootte van de deze video veranderen?",
         antwoorden: {
-            a: "TEST A",
-            b: "TEST B",
-            c: "TEST C voor CORRECT",
-            d: "TEST D"
+            a: "Het HTML-bestand",
+            b: "Het CSS-bestand",
+            c: "Het JavaScript-bestand",
+            d: "Alledrie"
         },
         extra: '<iframe src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-        correcteAntwoord: "c"
+        correcteAntwoord: "d"
     },
 ];
 
@@ -138,11 +138,13 @@ function hideAllPages() {
     var questionsPage = document.getElementById('page-questions');
     var endPage = document.getElementById('page-end');
     var scoreBar = document.getElementById('scorebar');
+    var navBar  = document.getElementById('nav-bar');
 
     startPage.style.display = 'none';   
     questionsPage.style.display = 'none';
     endPage.style.display = 'none';
     scoreBar.style.display = 'none';
+    navBar.style.display = 'none';
 }
 
 /**
@@ -151,10 +153,12 @@ function hideAllPages() {
 function showStartPage() {
     var page = document.getElementById('page-start');
     var startButton = document.getElementById('button-start');
+    var navBar = document.getElementById('nav-bar');
     
     hideAllPages();
 
     page.style.display = 'block';
+    navBar.style.display = 'block';
     unBoldAllButtons();
     boldButton(startButton);
 
@@ -176,7 +180,7 @@ function showQuestionsPage() {
     unBoldAllButtons();
     boldButton(questionsButton);
     showQuestion(vraagNummer)
-    points()
+    updateScoreCounter()
 
     console.info('Je bent nu op de vragenpagina');
 }
@@ -230,7 +234,7 @@ function showQuestion(num) {
     answerButtonD.innerHTML = "d. " + QUIZ_VRAGEN[num].antwoorden.d;
 };
 
-function points() {
+function updateScoreCounter() {
     var scoreCounter = document.getElementById("score-counter");
     var score = countTrue(isCorrect);
     var total = QUIZ_VRAGEN.length;
@@ -259,7 +263,7 @@ function answerPressed(answer) {
     } else {
         showQuestionsPage(vraagNummer)
     }
-    points()
+    updateScoreCounter()
 };
 
 // Initialize

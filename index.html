@@ -17,7 +17,7 @@
         </div>
         <nav id=nav-bar>
             <button class="nav-button" id="button-start">Start</button>
-            <button class="nav-button" id="button-questions">Vragen</button>
+            <button class="nav-button" id="button-questions">Vragen >></button>
         </nav>
         <div class="scorebar" id="scorebar">
             <p id=score-counter></p>
@@ -31,17 +31,23 @@
                 </p>
                 <h2>Uitleg</h2>
                 <ol type="1">
-                    <li>Klik op de knop "Vragen" om de quiz te starten.</li>
+                    <li> (WIP) Vul je studentnummer in op deze pagina als je later de score wilt vergelijken met je medestudenten.</li>
+                    <li>Klik op de knop "Vragen >>" om de quiz te starten.</li>
                     <li>Beantwoord de multiple-choice vragen door gebruik te maken van de knoppen.</li>
-                    <li>Aan het eind van de quiz kun je je studentnummer invullen om je score te vergelijken met medestudenten.</li>
+                    <li>Aan het eind van de quiz kun je je score vergelijken met je medestudenten (en terugkijken naar vorige vragen).</li>
                 </ol>
+
+                <!-- <h2>Inloggen</h2> -->
+                <!-- <label for="studentnummer" >Studentnummer: </label> -->
+                <!-- <input name="studentnummer" id="studentnummer" maxlength="8" placeholder="s1234567" > -->
+                <!-- <button id="login-button">Inloggen</button> -->
+                <!-- <p id="login-status"></p> -->
 
             </div>
             
             <!-- Deze pagina kan aangevuld worden met JavaScript -->
             <div class="page" id="page-questions"> 
-                <h2>Vragen</h2> <!-- generieke titel -->
-                <h3 id="question-title"></h3> <!-- naam van de vraag -->
+                <h2 id="question-title"></h3> <!-- naam van de vraag -->
                 <p id="question"></p> <!-- de vraag zelf -->
                 <div id="question-extras"></div> <!-- extras, zoals foto's of andere voorbeelden -->
                 <!-- De 4 antwoorden. Nog even uitzoeken hoe ik ze iets laat doen. -->
@@ -54,8 +60,8 @@
             <div class="page" id="page-end">
                 <h2>Einde</h2>
                 <p>Je bent bij het einde van de quiz gekomen.</p>
-                <p id="end-score">tset</p>
-                <p id="end-result">tsett</p>
+                <p id="end-score"></p>
+                <p id="end-result"></p>
             </div>
 
         </main>
