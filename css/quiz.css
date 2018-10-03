@@ -105,6 +105,19 @@ nav {
     background-color: rgb(17, 17, 17);
 }
 
+#next-question {
+    display: inline-block;
+    color: #DDDDDD;
+    padding: 1em 1em;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    font-weight: bold;
+}
+
 #question-extras {
     width: 300px;
     max-height: 100%;

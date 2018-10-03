@@ -34,10 +34,10 @@ const QUIZ_VRAGEN = [
             c: "het gou",
             d: "ouden p"
         },
-        extra: '<code>\
-            var text = "het gouden paleis";\
-            window.alert(text.substr(5, 7)\
-        </code>',
+        extra: '\
+            <code>var text = "het gouden paleis";</code>\
+            <code>window.alert(text.substr(5, 7)</code>\
+        ',
         correcteAntwoord: "d"
     },
     {
@@ -48,10 +48,10 @@ const QUIZ_VRAGEN = [
             c: "false en true",
             d: "false en false"
         },
-        extra: '<code>\
-            window.alert(9 == "9");\
-            window.alert(9 === "9")\
-        </code>',
+        extra: '\
+            <code>window.alert(9 == "9");</code>\
+            <code>window.alert(9 === "9")</code>\
+        ',
         correcteAntwoord: "b"
     },
     {
@@ -70,6 +70,7 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
+var answerButtonClickable
 
 
 /**
@@ -109,6 +110,7 @@ function addButtonActions() {
     var answerButtonB = document.getElementById('answerB');
     var answerButtonC = document.getElementById('answerC');
     var answerButtonD = document.getElementById('answerD');
+    var nextQuestion = document.getElementById('next-question');
 
     startButton.addEventListener("click", function () {
         showStartPage();
@@ -117,16 +119,27 @@ function addButtonActions() {
         showQuestionsPage();
     });
     answerButtonA.addEventListener("click", function () {
-        answerPressed("a")
+        if (answerButtonClickable == true) {
+            answerPressed("a");
+        }
     });
     answerButtonB.addEventListener("click", function () {
-        answerPressed("b")
+        if (answerButtonClickable == true) {
+            answerPressed("b");
+        }
     });
     answerButtonC.addEventListener("click", function () {
-        answerPressed("c")
+        if (answerButtonClickable == true) {
+            answerPressed("c");
+        }
     });
     answerButtonD.addEventListener("click", function () {
-        answerPressed("d")
+        if (answerButtonClickable == true) {
+            answerPressed("d");
+        }
+    });
+    nextQuestion.addEventListener("click", function () {
+        goToNextQuestion(); 
     });
 };
 
@@ -224,6 +237,8 @@ function showQuestion(num) {
     var answerButtonB = document.getElementById('answerB');
     var answerButtonC = document.getElementById('answerC');
     var answerButtonD = document.getElementById('answerD');
+    var feedback = document.getElementById('feedback');
+    var nextQuestion = document.getElementById('next-question');
 
     questionTitle.innerHTML = "Vraag " + num;
     question.innerHTML = QUIZ_VRAGEN[num].vraag;
@@ -232,6 +247,10 @@ function showQuestion(num) {
     answerButtonB.innerHTML = "b. " + QUIZ_VRAGEN[num].antwoorden.b;
     answerButtonC.innerHTML = "c. " + QUIZ_VRAGEN[num].antwoorden.c;
     answerButtonD.innerHTML = "d. " + QUIZ_VRAGEN[num].antwoorden.d;
+    feedback.innerHTML = ""
+
+    answerButtonClickable = true;
+    nextQuestion.style.display = 'none';
 };
 
 function updateScoreCounter() {
@@ -245,26 +264,78 @@ function updateScoreCounter() {
 
 /**
  * Deze functie definieert wat er gebeurt als je op een van de knoppen drukt.
+ * Hierdoor gebeuren een aantal dingen die ik de 'feedback-flow' noem.
+ * Daardoor kan de gebruiker het antwoord evalueren.
  */
 function answerPressed(answer) {
     var correct = QUIZ_VRAGEN[vraagNummer].correcteAntwoord;
-    if (answer == correct) {
-        window.alert("Goed! 👍 Het antwoord is " + correct + ': "' + QUIZ_VRAGEN[vraagNummer].antwoorden[correct] + '"');
-        antwoorden.push(answer)
-        isCorrect.push(true);
+    var feedback = document.getElementById('feedback');
+
+    var answerButtonA = document.getElementById('answerA');
+    var answerButtonB = document.getElementById('answerB');
+    var answerButtonC = document.getElementById('answerC');
+    var answerButtonD = document.getElementById('answerD');
+
+    var nextQuestion = document.getElementById('next-question');
+
+    var correctButton;
+    if (correct == "a") {
+        correctButton = answerButtonA;
+    } else if (correct == "b") {
+        correctButton = answerButtonB;
+    } else if (correct == "c") {
+        correctButton = answerButtonC;
     } else {
-        window.alert("Fout. 👎 Het juiste antwoord is " + correct + ': "' + QUIZ_VRAGEN[vraagNummer].antwoorden[correct] + '"');
+        correctButton = answerButtonD;
+    };
+
+    var pressedButton;
+    if (answer == "a") {
+        pressedButton = answerButtonA;
+    } else if (answer == "b") {
+        pressedButton = answerButtonB;
+    } else if (answer == "c") {
+        pressedButton = answerButtonC;
+    } else {
+        pressedButton = answerButtonD;
+    };
+
+
+    answerButtonClickable = false;
+
+    // Als het antwoord correct is, wordt dat aangegeven, de juiste knop groen gemarkeerd en het antwoord opgeslagen.
+    // Als het fout is, wordt dat opgeslagen en wordt het foute antwoord ook gemarkeerd.
+    if (answer == correct) {
+        feedback.innerHTML = "Goed. 👍";
+        antwoorden.push(answer);
+        isCorrect.push(true);
+        correctButton.style.background = "rgb(51, 153, 51)";
+    } else {
+        feedback.innerHTML = "Fout. 👎";
         antwoorden.push(answer);
         isCorrect.push(false);
+        correctButton.style.background = "rgb(51, 153, 51)";
+        pressedButton.style.background = "rgb(204, 0, 0)";
     };
-    vraagNummer = vraagNummer + 1;
+    updateScoreCounter();
+    nextQuestion.style.display = "inline-block";
+};
+
+function goToNextQuestion() {
+    vraagNummer++;
+    var allAnswerButtons = document.getElementsByClassName("answer-button");
+    // Deze for-loop zorgt ervoor dat alle knoppen weer de normale kleur krijgen
+    for (var i = 0; i < allAnswerButtons.length; i++) {
+        allAnswerButtons[i].style.background = "transparent";
+    }
+
+
     if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
         showEndPage();
     } else {
         showQuestionsPage(vraagNummer)
     }
-    updateScoreCounter()
-};
+}
 
 // Initialize
 addButtonActions();
