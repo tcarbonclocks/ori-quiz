@@ -312,6 +312,7 @@ function sortLeaderboard(array) {
 
 function makeAlreadyPlayedArray() {
     alreadyPlayed = [];
+    getLeaderBoard();
     for (var i = 0; i < leaderboard.length; i++) {
         alreadyPlayed.push(leaderboard[i].player.number);
     };
@@ -596,6 +597,8 @@ function showLoginPage() {
 
     hideAllPages();
 
+    getLeaderBoard(); // om te checken of iemand al heeft gespeeld, ben ik afhankelijk van de leaderboard.
+
     page.style.display = 'block';
     navBar.style.display = 'block';
     unBoldAllButtons();
@@ -786,6 +789,5 @@ function goToNextQuestion() {
 // Initialize
 addButtonActions();
 showStartPage();
-getLeaderBoard();
 boldButton(document.getElementById('button-start'));
 console.info("Misschien werkt het geheime commando... 😉")
