@@ -98,6 +98,19 @@ const QUIZ_VRAGEN = [
         extra: '<img src=pictures/programmaLogo.png>',
         correcteAntwoord: "a"
     },
+    {
+        vraag: "Met wat kan ik in de CSS de achtergrondkleur veranderen als mijn muis over de knop zweeft?",
+        antwoorden: {
+            a: ":mouseover",
+            b: ":hover",
+            c: ":mousecheck",
+            d: ".hover"
+        },
+        extra: '<video autoplay loop muted>\
+        <source src="pictures/hoverEffect.mp4" type="video/mp4">\
+        </video>',
+        correcteAntwoord: "b"
+    },
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
@@ -213,6 +226,15 @@ function addButtonActions() {
     });
     checkButton.addEventListener("click", function () {
         checkStudent(studentNumber.value);
+    });
+    studentNumber.addEventListener("keyup", function (event) {
+        // Cancel default action
+        event.preventDefault();
+
+        // Detect if enter key (key 13) is pressed
+        if (event.keyCode === 13) {
+            checkStudent(studentNumber.value);
+        };
     });
     answerButtonA.addEventListener("click", function () {
         if (answerButtonClickable == true) {
@@ -332,6 +354,8 @@ function showEndPage() {
         endResult.innerHTML = "Je hebt (meer dan) de helft goed 😃. Voldoende.";
     } else {
         endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed."
+        var audio = new Audio('pictures/loss.ogg');
+        audio.play();
     }
 
     console.info('Je bent nu op de eindpagina van de quiz.');
