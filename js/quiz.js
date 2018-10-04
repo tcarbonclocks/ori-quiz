@@ -355,6 +355,7 @@ function showEndPage() {
     } else {
         endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed."
         var audio = new Audio('pictures/loss.ogg');
+        audio.volume = 0.5;
         audio.play();
     }
 
