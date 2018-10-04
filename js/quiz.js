@@ -135,6 +135,28 @@ const QUIZ_VRAGEN = [
         extra: "",
         correcteAntwoord: "a"
     },
+    {
+        vraag: "Hoeveel vragen hebben we al gehad?",
+        antwoorden: {
+            a: "Acht",
+            b: "Negen",
+            c: "Tien",
+            d: "Elf"
+        },
+        extra: "",
+        correcteAntwoord: "c"
+    }, 
+    {
+        vraag: "Van boven naar onder, welke woorden missen hier?",
+        antwoorden: {
+            a: "border, padding en margin",
+            b: "margin, padding en border",
+            c: "pading, border en margin",
+            d: "margin, border en padding"
+        },
+        extra: "<img src=pictures/boxModel.png>",
+        correcteAntwoord: "d"
+    },  
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
