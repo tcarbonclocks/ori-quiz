@@ -112,7 +112,7 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "b"
     },
     {
-        vraag: "Hoe kan ik de startpagina (variabele start) laten verdwijnen met JavaScript?",
+        vraag: "Hoe kan ik de startpagina (variabele 'start') laten verdwijnen met JavaScript?",
         antwoorden: {
             a: "start.display = 'off'",
             b: "start.style.display = 'off'",
@@ -156,7 +156,97 @@ const QUIZ_VRAGEN = [
         },
         extra: "<img src=pictures/boxModel.png>",
         correcteAntwoord: "d"
-    },  
+    },
+    {
+        vraag: "Hoe kan ik d.m.v. JavaScript deze knop (variabele 'button') een groene kleur geven?",
+        antwoorden: {
+            a: "button.style.background = 'green'",
+            b: "button.style.backgroundColour = 'green'",
+            c: "button.body.style.background = 'green'",
+            d: "button.background = 'green'"
+        },
+        extra: '<video width=320 autoplay loop muted>\
+        <source src="pictures/green.mp4" type="video/mp4">\
+        </video>',
+        correcteAntwoord: "a"
+    },
+    {
+        vraag: "Hoe kan ik in Git mijn veranderingen naar de server uploaden?",
+        antwoorden: {
+            a: "git fetch",
+            b: "git push",
+            c: "git upload",
+            d: "git share"
+        },
+        extra: '<img src=pictures/programmaLogo.png>',
+        correcteAntwoord: "b"
+    },
+    {
+        vraag: "Wat voor soort element is het h2-element?",
+        antwoorden: {
+            a: "Een block-element",
+            b: "Een inline-element",
+            c: "Een inline-block-element",
+            d: "Een relative-element"
+        },
+        extra: "",
+        correcteAntwoord: "a"
+    },
+    {
+        vraag: "Wat voor datatype is dit?",
+        antwoorden: {
+            a: "Een object",
+            b: "Een array",
+            c: "Een string",
+            d: "Een multidimensionale array"
+        },
+        extra: "<code>var HansBastiaan = {gender: 'male', teaches: 'ORI', likesArrays: true}</code>",
+        correcteAntwoord: "a"
+    },
+    {
+        vraag: "Wat is i++?",
+        antwoorden: {
+            a: "De opvolger van h++",
+            b: "i + 1",
+            c: "i + 2",
+            d: "ii"
+        },
+        extra: "",
+        correcteAntwoord: "b"
+    },
+    {
+        vraag: "Hoe zorg ik ervoor dat er niet meer dan 8 karakters in mijn input kunnen?",
+        antwoorden: {
+            a: "limit='8'",
+            b: "length='8'",
+            c: "maxlength='8'",
+            d: "maxChracters='8'"
+        },
+        extra: "<img src=pictures/textField.png>",
+        correcteAntwoord: "c"
+    },
+    {
+        vraag: "Hoe kan ik de waarde van deze input (variabele 'input') in een variabele stoppen?",
+        antwoorden: {
+            a: "var output = input.output;",
+            b: "var typed = input.typed;",
+            c: "var content = input.content;",
+            d: "var value = input.value;"
+        },
+        extra: "<img src=pictures/textField.png>",
+        correcteAntwoord: "d"
+    },
+    {
+        vraag: "Wat is het datatype van de volgende variabele?",
+        antwoorden: {
+            a: "Een object",
+            b: "Een array",
+            c: "Een string",
+            d: "Een boolean"
+        },
+        extra: "<code>var SuperClass = document.getElementsByClassName('class')</code>",
+        correcteAntwoord: "b"
+    }, 
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
@@ -170,7 +260,7 @@ function millisToMinutesAndSeconds(millis) {
     // var seconds = ((millis % 60000) / 1000).toFixed(0);
     var seconds = Math.floor((millis % 60000) / 1000);
     return minutes + " minuten en " + seconds + " seconden";
-  }
+};
 
 /**
  * Function to send score to leaderboard 
@@ -423,6 +513,7 @@ function showEndPage() {
     var page = document.getElementById('page-end');
     var navBar = document.getElementById('nav-bar');
 
+    var endIntro = document.getElementById('end-intro');
     var endScore = document.getElementById('end-score');
     var endTimeElapsed = document.getElementById('end-time-elapsed');
     var endResult = document.getElementById('end-result');
@@ -447,6 +538,7 @@ function showEndPage() {
         console.error("Tijd te lang of te kort"); 
     };
 
+    endIntro.innerHTML = "Je bent bij het einde van de quiz gekomen, " + studentInfo.firstName + ".";
     endScore.innerHTML = "Je hebt in totaal " + score + " vragen van de " + total + " goed beantwoord.";
     endTimeElapsed.innerHTML = "Het maken van de quiz duurde " + quizTimeinMinSec + ".";
     if (score == total) {
