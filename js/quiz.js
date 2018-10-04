@@ -252,7 +252,7 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
-var answerButtonClickable, studentInfo, startTime, endTime;
+var answerButtonClickable, studentInfo, startTime, endTime, scoreBoard;
 
 // Converteert milliseconden naar minuten en seconden, met dank aan https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
 function millisToMinutesAndSeconds(millis) {
@@ -260,6 +260,46 @@ function millisToMinutesAndSeconds(millis) {
     // var seconds = ((millis % 60000) / 1000).toFixed(0);
     var seconds = Math.floor((millis % 60000) / 1000);
     return minutes + " minuten en " + seconds + " seconden";
+};
+
+/**
+ * Get unordered scoreboard  
+ */
+function getUnorderedScoreBoard() {
+    var xHttp = new XMLHttpRequest();
+    xHttp.onreadystatechange = function () {
+        if (xHttp.readyState == XMLHttpRequest.DONE) {
+            var response = JSON.parse(xHttp.response);
+            if (xHttp.status == 200) {
+                console.info("Scoreboard is geladen");
+                console.log(response);
+                sortArrayByValue(response);
+            } else {
+                console.error(response);
+            };
+        };
+    };
+    xHttp.onerror = function () {
+        console.error(xHttp.statusText)
+    };
+    xHttp.open("GET", "https://quiz.clow.nl/v1/highscores/s1132653", true);
+    xHttp.send();
+};
+
+/**
+ * Sort array by value in objects (https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript)
+ * and then creates the scoreboard by slicing that array.
+ */
+function sortArrayByValue(array) {
+    function compare(a,b) {
+        if (b.points < a.points)
+          return -1;
+        if (b.points > a.points)
+          return 1;
+        return 0;
+    };
+    array.sort(compare);
+    scoreBoard = array.slice(0, 10)
 };
 
 /**
