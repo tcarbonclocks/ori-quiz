@@ -65,6 +65,28 @@ const QUIZ_VRAGEN = [
         extra: '<iframe src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
         correcteAntwoord: "d"
     },
+    {
+        vraag: "Hoe kom ik bij mijn appels?",
+        antwoorden: {
+            a: "rugTas.boodschappenTas.fruitZakje.appelZakje[1]",
+            b: "rugTas.schoolTas[2]",
+            c: "rugTas.schoolTas[1]",
+            d: "rugTas.schoolTas.1"
+        },
+        extra: '<code>\
+        var rugTas = { </br>\
+            boodschappenTas: {</br>\
+                broodZakje: ["pistolets", "croissants"],</br>\
+                fruitZakje: {</br>\
+                    perenTasje: ["peer 1", "peer 2", "peer3"],</br>\
+                    appelTasje: ["peer 4", "voordeelbon"]</br>\
+                },</br>\
+            },</br>\
+            schoolTas: ["collegeblok", "appel", "etui", "portaal naar andere dimensie"],</br>\
+        };\
+        </code>',
+        correcteAntwoord: "c"
+    },
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
