@@ -78,8 +78,8 @@ const QUIZ_VRAGEN = [
             boodschappenTas: {</br>\
                 broodZakje: ["pistolets", "croissants"],</br>\
                 fruitZakje: {</br>\
-                    perenTasje: ["peer 1", "peer 2", "peer3"],</br>\
-                    appelTasje: ["peer 4", "voordeelbon"]</br>\
+                    perenZakje: ["peer 1", "peer 2", "peer3"],</br>\
+                    appelZakje: ["peer 4", "voordeelbon"]</br>\
                 },</br>\
             },</br>\
             schoolTas: ["collegeblok", "appel", "etui", "portaal naar andere dimensie"],</br>\
