@@ -258,7 +258,7 @@ var answerButtonClickable, studentInfo, startTime, endTime, leaderboard;
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = Math.floor((millis % 60000) / 1000);
-    return minutes + " minu(u)t(en) en " + seconds + " seconden";
+    return minutes + (minutes = 1 ? ' minuut en ' : ' minuten en ') + seconds + " seconden";
 };
 
 function secondsToMinutesAndSeconds(inputseconds) {
