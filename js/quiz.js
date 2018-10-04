@@ -111,6 +111,30 @@ const QUIZ_VRAGEN = [
         </video>',
         correcteAntwoord: "b"
     },
+    {
+        vraag: "Hoe kan ik de startpagina (variabele start) laten verdwijnen met JavaScript?",
+        antwoorden: {
+            a: "start.display = 'off'",
+            b: "start.style.display = 'off'",
+            c: "start.style.display = 'none'",
+            d: "start.show = 'none'"
+        },
+        extra: '<video width=320 autoplay loop muted>\
+        <source src="pictures/displayNone.mp4" type="video/mp4">\
+        </video>',
+        correcteAntwoord: "c"
+    },
+    {
+        vraag: "Hoe definieer ik een class in CSS?",
+        antwoorden: {
+            a: ".class",
+            b: "#class",
+            c: ":class",
+            d: "class"
+        },
+        extra: "",
+        correcteAntwoord: "a"
+    },
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
@@ -118,6 +142,38 @@ var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker 
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
 var answerButtonClickable;
 var studentInfo;
+
+/**
+ * Function to send score to leaderboard 
+ */
+function sendScore(student, points) {
+    var xHttp = new XMLHttpRequest();
+    var sendScoreResult = document.getElementById("sendscore-result");
+
+    xHttp.onreadystatechange = function () {
+        if (xHttp.readyState == XMLHttpRequest.DONE) {
+            if (xHttp.status == 200) {
+                console.info("Score succesvol opgeslagen");
+                sendScoreResult.innerHTML = "Je score is succesvol opgeslagen.";
+            } else {
+                console.error("Score niet succesvol opgeslagen");
+                sendScoreResult.innerHTML = "Door een fout kon je score jammer genoeg niet opgeslagen worden.";
+            }
+        }
+    };
+    
+    xHttp.onerror = function () {
+        console.error("Score niet succesvol opgeslagen");
+    };
+
+    xHttp.open("POST", "https://quiz.clow.nl/v1/score", true)
+    xHttp.setRequestHeader('Content-Type', 'application/json');
+    xHttp.send(JSON.stringify({
+        quizMaster: "s1132653",
+        student: student,
+        points: points,
+    }));
+};
 
 
 /**
@@ -227,6 +283,7 @@ function addButtonActions() {
     checkButton.addEventListener("click", function () {
         checkStudent(studentNumber.value);
     });
+    // also runs checkStudent if user presses the enter button, thanks to https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
     studentNumber.addEventListener("keyup", function (event) {
         // Cancel default action
         event.preventDefault();
@@ -346,6 +403,8 @@ function showEndPage() {
 
     navBar.style.display = 'none';
     page.style.display = 'block';
+
+    sendScore(studentInfo.number, countTrue(isCorrect));
 
     endScore.innerHTML = "Je hebt in totaal " + score + " vragen van de " + total + " goed beantwoord.";
     if (score == total) {
@@ -470,7 +529,7 @@ function goToNextQuestion() {
     if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
         showEndPage();
     } else {
-        showQuestionsPage(vraagNummer)
+        showQuestion(vraagNummer)
     }
 }
 
