@@ -252,6 +252,7 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
+var alreadyPlayed = [];
 var answerButtonClickable, studentInfo, startTime, endTime, leaderboard;
 
 // Converteert milliseconden naar minuten en seconden, met dank aan https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
@@ -278,7 +279,7 @@ function getLeaderBoard() {
             if (xHttp.status == 200) {
                 console.info("Leaderboard is geladen");
                 console.log(response);
-                makeLeaderboard(response);
+                sortLeaderboard(response);
                 showLeaderboard();
             } else {
                 console.error(response);
@@ -294,9 +295,9 @@ function getLeaderBoard() {
 
 /**
  * Sort array by value in objects (https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript)
- * and then creates the leaderboard by slicing that array.
+ * and then creates the leaderboard .
  */
-function makeLeaderboard(array) {
+function sortLeaderboard(array) {
     function compare(a,b) {
         if (b.points < a.points)
           return -1;
@@ -305,7 +306,25 @@ function makeLeaderboard(array) {
         return 0;
     };
     array.sort(compare);
-    leaderboard = array.slice(0, 10)
+    leaderboard = array;
+};
+
+
+function makeAlreadyPlayedArray() {
+    alreadyPlayed = [];
+    for (var i = 0; i < leaderboard.length; i++) {
+        alreadyPlayed.push(leaderboard[i].player.number);
+    };
+};
+
+function checkAlreadyPlayed(num) {
+    makeAlreadyPlayedArray();
+
+    if (alreadyPlayed.includes(num)) {
+        return true;
+    } else {
+        return false;
+    };
 };
 
 /**
@@ -441,6 +460,8 @@ function addButtonActions() {
     var checkButton = document.getElementById('check-number');
     var studentNumber = document.getElementById('studentnummer');
 
+    var loginStatus = document.getElementById('login-status');
+
     startButton.addEventListener("click", function () {
         showStartPage();
     });
@@ -451,15 +472,10 @@ function addButtonActions() {
         showLoginPage();
     });
     checkButton.addEventListener("click", function () {
-        checkStudent(studentNumber.value);
-    });
-    // also runs checkStudent if user presses the enter button, thanks to https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
-    studentNumber.addEventListener("keyup", function (event) {
-        // Cancel default action
-        event.preventDefault();
-
-        // Detect if enter key (key 13) is pressed
-        if (event.keyCode === 13) {
+        if (checkAlreadyPlayed(studentNumber.value) == true) {
+            loginStatus.style.color = "rgb(204, 0, 0)";
+            loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
+        } else {
             checkStudent(studentNumber.value);
         };
     });
@@ -770,5 +786,6 @@ function goToNextQuestion() {
 // Initialize
 addButtonActions();
 showStartPage();
+getLeaderBoard();
 boldButton(document.getElementById('button-start'));
 console.info("Misschien werkt het geheime commando... 😉")
