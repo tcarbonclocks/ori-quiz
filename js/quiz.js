@@ -252,28 +252,34 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
-var answerButtonClickable, studentInfo, startTime, endTime, scoreBoard;
+var answerButtonClickable, studentInfo, startTime, endTime, leaderboard;
 
 // Converteert milliseconden naar minuten en seconden, met dank aan https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
-    // var seconds = ((millis % 60000) / 1000).toFixed(0);
     var seconds = Math.floor((millis % 60000) / 1000);
-    return minutes + " minuten en " + seconds + " seconden";
+    return minutes + " minu(u)t(en) en " + seconds + " seconden";
+};
+
+function secondsToMinutesAndSeconds(inputseconds) {
+    var minutes = Math.floor(inputseconds / 60);
+    var seconds = Math.floor(inputseconds % 60);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 };
 
 /**
- * Get unordered scoreboard  
+ * Get leaderboard  
  */
-function getUnorderedScoreBoard() {
+function getLeaderBoard() {
     var xHttp = new XMLHttpRequest();
     xHttp.onreadystatechange = function () {
         if (xHttp.readyState == XMLHttpRequest.DONE) {
             var response = JSON.parse(xHttp.response);
             if (xHttp.status == 200) {
-                console.info("Scoreboard is geladen");
+                console.info("Leaderboard is geladen");
                 console.log(response);
-                sortArrayByValue(response);
+                makeLeaderboard(response);
+                showLeaderboard();
             } else {
                 console.error(response);
             };
@@ -288,9 +294,9 @@ function getUnorderedScoreBoard() {
 
 /**
  * Sort array by value in objects (https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript)
- * and then creates the scoreboard by slicing that array.
+ * and then creates the leaderboard by slicing that array.
  */
-function sortArrayByValue(array) {
+function makeLeaderboard(array) {
     function compare(a,b) {
         if (b.points < a.points)
           return -1;
@@ -299,7 +305,7 @@ function sortArrayByValue(array) {
         return 0;
     };
     array.sort(compare);
-    scoreBoard = array.slice(0, 10)
+    leaderboard = array.slice(0, 10)
 };
 
 /**
@@ -425,6 +431,7 @@ function boldButton(btn) {
  */
 function addButtonActions() {
     var startButton = document.getElementById('button-start');
+    var leaderboardButton = document.getElementById("button-leaderboard");
     var loginButton = document.getElementById('button-login');
     var answerButtonA = document.getElementById('answerA');
     var answerButtonB = document.getElementById('answerB');
@@ -436,6 +443,9 @@ function addButtonActions() {
 
     startButton.addEventListener("click", function () {
         showStartPage();
+    });
+    leaderboardButton.addEventListener("click", function () {
+        showLeaderboardPage();
     });
     loginButton.addEventListener("click", function () {
         showLoginPage();
@@ -483,6 +493,7 @@ function addButtonActions() {
  */
 function hideAllPages() {
     var startPage = document.getElementById('page-start');
+    var leaderboardPage = document.getElementById('page-leaderboard');
     var loginPage = document.getElementById('page-login');
     var questionsPage = document.getElementById('page-questions');
     var endPage = document.getElementById('page-end');
@@ -490,6 +501,7 @@ function hideAllPages() {
     var navBar  = document.getElementById('nav-bar');
 
     startPage.style.display = 'none';   
+    leaderboardPage.style.display = 'none';
     loginPage.style.display = 'none';
     questionsPage.style.display = 'none';
     endPage.style.display = 'none';
@@ -515,6 +527,52 @@ function showStartPage() {
     console.info('Je bent nu op de startpagina');
 };
 
+function showLeaderboardPage() {
+    var page = document.getElementById("page-leaderboard");
+    var leaderboardButton = document.getElementById("button-leaderboard");
+    var navBar = document.getElementById('nav-bar');
+
+    hideAllPages();
+
+
+    page.style.display = 'block';
+    navBar.style.display = 'block';
+    unBoldAllButtons();
+    boldButton(leaderboardButton);
+
+    getLeaderBoard();
+
+    console.info("Je bent nu op de leaderboard-pagina.");
+};
+
+
+function showLeaderboard() {
+    var LB1 = document.getElementById("lb1");
+    var LB2 = document.getElementById("lb2");
+    var LB3 = document.getElementById("lb3");
+    var LB4 = document.getElementById("lb4");
+    var LB5 = document.getElementById("lb5");
+    var LB6 = document.getElementById("lb6");
+    var LB7 = document.getElementById("lb7");
+    var LB8 = document.getElementById("lb8");
+    var LB9 = document.getElementById("lb9");
+    var LB10 = document.getElementById("lb10");
+
+    LB1.innerHTML = leaderboard[0].player.firstName + " " + leaderboard[0].player.lastName + " (" + leaderboard[0].player.number + "), " + leaderboard[0].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[0].time);
+    LB2.innerHTML = leaderboard[1].player.firstName + " " + leaderboard[1].player.lastName + " (" + leaderboard[1].player.number + "), " + leaderboard[1].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[1].time);
+    LB3.innerHTML = leaderboard[2].player.firstName + " " + leaderboard[2].player.lastName + " (" + leaderboard[2].player.number + "), " + leaderboard[2].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[2].time);
+    LB4.innerHTML = leaderboard[3].player.firstName + " " + leaderboard[3].player.lastName + " (" + leaderboard[3].player.number + "), " + leaderboard[3].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[3].time);
+    LB5.innerHTML = leaderboard[4].player.firstName + " " + leaderboard[4].player.lastName + " (" + leaderboard[4].player.number + "), " + leaderboard[4].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[4].time);
+    LB6.innerHTML = leaderboard[5].player.firstName + " " + leaderboard[5].player.lastName + " (" + leaderboard[5].player.number + "), " + leaderboard[5].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[5].time);
+    LB7.innerHTML = leaderboard[6].player.firstName + " " + leaderboard[6].player.lastName + " (" + leaderboard[6].player.number + "), " + leaderboard[6].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[6].time);
+    LB8.innerHTML = leaderboard[7].player.firstName + " " + leaderboard[7].player.lastName + " (" + leaderboard[7].player.number + "), " + leaderboard[7].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[7].time);
+    LB9.innerHTML = leaderboard[8].player.firstName + " " + leaderboard[8].player.lastName + " (" + leaderboard[8].player.number + "), " + leaderboard[8].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[8].time);
+    LB10.innerHTML = leaderboard[9].player.firstName + " " + leaderboard[9].player.lastName + " (" + leaderboard[9].player.number + "), " + leaderboard[9].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[9].time);
+};
+
+/**
+ * Show login page
+ */
 function showLoginPage() {
     var page = document.getElementById('page-login');
     var loginButton = document.getElementById('button-login');
@@ -548,7 +606,9 @@ function showQuestionsPage() {
     console.info('Je bent nu op de vragenpagina');
 };
 
-
+/**
+ * Show end page that appears after all questions have been answered
+ */
 function showEndPage() {
     var page = document.getElementById('page-end');
     var navBar = document.getElementById('nav-bar');
