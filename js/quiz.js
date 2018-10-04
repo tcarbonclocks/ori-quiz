@@ -146,7 +146,7 @@ var answerButtonClickable, studentInfo, startTime, endTime;
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + " minuten en " + (seconds < 10 ? '0' : '') + seconds + " seconden";
+    return minutes + " minuten en " + seconds + " seconden";
   }
 
 /**
