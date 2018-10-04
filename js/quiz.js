@@ -66,7 +66,7 @@ const QUIZ_VRAGEN = [
         correcteAntwoord: "d"
     },
     {
-        vraag: "Hoe kom ik bij mijn appels?",
+        vraag: "Hoe kom ik bij mijnAppel?",
         antwoorden: {
             a: "rugTas.boodschappenTas.fruitZakje.appelZakje[1]",
             b: "rugTas.schoolTas[2]",
@@ -79,10 +79,10 @@ const QUIZ_VRAGEN = [
                 broodZakje: ["pistolets", "croissants"],</br>\
                 fruitZakje: {</br>\
                     perenZakje: ["peer 1", "peer 2", "peer3"],</br>\
-                    appelZakje: ["peer 4", "voordeelbon"]</br>\
+                    appelZakje: ["peer 4", "voordeelbon", "appel 1"]</br>\
                 },</br>\
             },</br>\
-            schoolTas: ["collegeblok", "appel", "etui", "portaal naar andere dimensie"],</br>\
+            schoolTas: ["collegeblok", "mijnAppel", "etui", "portaal naar andere dimensie"],</br>\
         };\
         </code>',
         correcteAntwoord: "c"
