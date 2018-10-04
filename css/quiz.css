@@ -104,7 +104,7 @@ nav {
     background-color: rgb(17, 17, 17);
 }
 
-#next-question {
+.question-actions {
     display: inline-block;
     color: #DDDDDD;
     padding: 1em 1em;

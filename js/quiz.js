@@ -458,6 +458,8 @@ function addButtonActions() {
     var answerButtonC = document.getElementById('answerC');
     var answerButtonD = document.getElementById('answerD');
     var nextQuestion = document.getElementById('next-question');
+    var currentQuestion = document.getElementById('current-question');
+    var previousQuestion = document.getElementById('previous-question');
     var checkButton = document.getElementById('check-number');
     var studentNumber = document.getElementById('studentnummer');
 
@@ -502,6 +504,12 @@ function addButtonActions() {
     });
     nextQuestion.addEventListener("click", function () {
         goToNextQuestion(); 
+    });
+    currentQuestion.addEventListener("click", function () {
+        showQuestion(vraagNummer);
+    });
+    previousQuestion.addEventListener("click", function () {
+        showPreviousQuestion(vraagNummer);
     });
 };
 
@@ -678,6 +686,12 @@ function showEndPage() {
  * Deze functie laat de vraag zien in de vragenpagina.
  */
 function showQuestion(num) {
+    var allAnswerButtons = document.getElementsByClassName("answer-button");
+    // Deze for-loop zorgt ervoor dat alle knoppen weer de normale kleur krijgen
+    for (var i = 0; i < allAnswerButtons.length; i++) {
+        allAnswerButtons[i].style.background = "transparent";
+    }
+
     var questionTitle = document.getElementById("question-title");
     var question = document.getElementById("question");
     var questionExtras = document.getElementById("question-extras");
@@ -687,6 +701,8 @@ function showQuestion(num) {
     var answerButtonD = document.getElementById('answerD');
     var feedback = document.getElementById('feedback');
     var nextQuestion = document.getElementById('next-question');
+    var currentQuestion = document.getElementById('current-question');
+    var previousQuestion = document.getElementById('previous-question');
 
     questionTitle.innerHTML = "Vraag " + num;
     question.innerHTML = QUIZ_VRAGEN[num].vraag;
@@ -699,6 +715,76 @@ function showQuestion(num) {
 
     answerButtonClickable = true;
     nextQuestion.style.display = 'none';
+    currentQuestion.style.display = 'none';
+    if (num == 0) {
+        previousQuestion.style.display = 'none';
+    } else {
+        previousQuestion.style.display = 'inline-block';
+    };
+};
+
+
+/**
+ * Deze functie laat de speler terug kijken op de vorige vraag
+ */
+function showPreviousQuestion(num) {
+    var questionTitle = document.getElementById("question-title");
+    var question = document.getElementById("question");
+    var questionExtras = document.getElementById("question-extras");
+    var answerButtonA = document.getElementById('answerA');
+    var answerButtonB = document.getElementById('answerB');
+    var answerButtonC = document.getElementById('answerC');
+    var answerButtonD = document.getElementById('answerD');
+    var feedback = document.getElementById('feedback');
+    var nextQuestion = document.getElementById('next-question');
+    var currentQuestion = document.getElementById('current-question');
+    var previousQuestion = document.getElementById('previous-question');
+
+    var correct = QUIZ_VRAGEN[num - 1].correcteAntwoord;
+
+    var correctButton;
+    if (correct == "a") {
+        correctButton = answerButtonA;
+    } else if (correct == "b") {
+        correctButton = answerButtonB;
+    } else if (correct == "c") {
+        correctButton = answerButtonC;
+    } else {
+        correctButton = answerButtonD;
+    };
+
+    var pressedButton;
+    if (antwoorden[num - 1] == "a") {
+        pressedButton = answerButtonA;
+    } else if (antwoorden[num - 1] == "b") {
+        pressedButton = answerButtonB;
+    } else if (antwoorden[num - 1] == "c") {
+        pressedButton = answerButtonC;
+    } else {
+        pressedButton = answerButtonD;
+    };
+
+    questionTitle.innerHTML = "Vraag " + (num - 1);
+    question.innerHTML = QUIZ_VRAGEN[num - 1].vraag;
+    questionExtras.innerHTML = QUIZ_VRAGEN[num - 1].extra;
+    answerButtonA.innerHTML = "a. " + QUIZ_VRAGEN[num - 1].antwoorden.a;
+    answerButtonB.innerHTML = "b. " + QUIZ_VRAGEN[num - 1].antwoorden.b;
+    answerButtonC.innerHTML = "c. " + QUIZ_VRAGEN[num - 1].antwoorden.c;
+    answerButtonD.innerHTML = "d. " + QUIZ_VRAGEN[num - 1].antwoorden.d;
+
+    answerButtonClickable = false;
+    nextQuestion.style.display = 'none';
+    currentQuestion.style.display = 'inline-block';
+    previousQuestion.style.display = 'none';
+
+    if (isCorrect[num - 1] == false) {
+        correctButton.style.background = "rgb(51, 153, 51)";
+        pressedButton.style.background = "rgb(204, 0, 0)";
+        feedback.innerHTML = "Fout. 👎";
+    } else {
+        correctButton.style.background = "rgb(51, 153, 51)";
+        feedback.innerHTML = "Goed. 👍"; 
+    };
 };
 
 function updateScoreCounter() {
@@ -726,6 +812,8 @@ function answerPressed(answer) {
     var answerButtonD = document.getElementById('answerD');
 
     var nextQuestion = document.getElementById('next-question');
+    var currentQuestion = document.getElementById('current-question');
+    var previousQuestion = document.getElementById('previous-question');
 
     var correctButton;
     if (correct == "a") {
@@ -768,15 +856,13 @@ function answerPressed(answer) {
     };
     updateScoreCounter();
     nextQuestion.style.display = "inline-block";
+    currentQuestion.style.display = 'none';
+    previousQuestion.style.display = 'none';
 };
 
 function goToNextQuestion() {
     vraagNummer++;
-    var allAnswerButtons = document.getElementsByClassName("answer-button");
-    // Deze for-loop zorgt ervoor dat alle knoppen weer de normale kleur krijgen
-    for (var i = 0; i < allAnswerButtons.length; i++) {
-        allAnswerButtons[i].style.background = "transparent";
-    }
+
 
 
     if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
