@@ -154,7 +154,6 @@ function sendScore(student, points) {
         if (xHttp.readyState == XMLHttpRequest.DONE) {
             if (xHttp.status == 200) {
                 console.info("Score succesvol opgeslagen");
-                sendScoreResult.innerHTML = "Je score is succesvol opgeslagen.";
             } else {
                 console.error("Score niet succesvol opgeslagen");
                 sendScoreResult.innerHTML = "Door een fout kon je score jammer genoeg niet opgeslagen worden.";
