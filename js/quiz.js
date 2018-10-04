@@ -140,13 +140,19 @@ const QUIZ_VRAGEN = [
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
 var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
 var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
-var answerButtonClickable;
-var studentInfo;
+var answerButtonClickable, studentInfo, startTime, endTime;
+
+// Converteert milliseconden naar minuten en seconden, met dank aan https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
+function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + " minuten en " + (seconds < 10 ? '0' : '') + seconds + " seconden";
+  }
 
 /**
  * Function to send score to leaderboard 
  */
-function sendScore(student, points) {
+function sendScore(student, points, time) {
     var xHttp = new XMLHttpRequest();
     var sendScoreResult = document.getElementById("sendscore-result");
 
@@ -171,6 +177,7 @@ function sendScore(student, points) {
         quizMaster: "s1132653",
         student: student,
         points: points,
+        time: time,
     }));
 };
 
@@ -213,6 +220,7 @@ function studentIdentificationSucces(student) {
 
     setTimeout(function () {
         showQuestionsPage();
+        startTime = Date.now();
     }, 3000)
 
 }
@@ -393,6 +401,7 @@ function showEndPage() {
     var navBar = document.getElementById('nav-bar');
 
     var endScore = document.getElementById('end-score');
+    var endTimeElapsed = document.getElementById('end-time-elapsed');
     var endResult = document.getElementById('end-result');
 
     var score = countTrue(isCorrect);
@@ -403,9 +412,20 @@ function showEndPage() {
     navBar.style.display = 'none';
     page.style.display = 'block';
 
-    sendScore(studentInfo.number, countTrue(isCorrect));
+    endTime = Date.now();
+    var quizTime = (endTime - startTime);
+    var quizTimeInSec = (quizTime) / 1000; 
+    var quizTimeinMinSec = millisToMinutesAndSeconds(quizTime);
+    
+    if (quizTimeInSec < 3600 && quizTime > 0) {
+        sendScore(studentInfo.number, countTrue(isCorrect), quizTimeInSec);
+    } else {
+        sendScoreResult.innerHTML = "Door een fout kon je score jammer genoeg niet opgeslagen worden.";
+        console.error("Tijd te lang of te kort"); 
+    };
 
     endScore.innerHTML = "Je hebt in totaal " + score + " vragen van de " + total + " goed beantwoord.";
+    endTimeElapsed.innerHTML = "Het maken van de quiz duurde " + quizTimeinMinSec + ".";
     if (score == total) {
         endResult.innerHTML = "Je hebt alles goed 🤯. Goed zo!";
     } else if ((score / total) >= 0.5) {
