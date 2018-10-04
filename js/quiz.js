@@ -87,6 +87,17 @@ const QUIZ_VRAGEN = [
         </code>',
         correcteAntwoord: "c"
     },
+    {
+        vraag: "Van welk programma is dit het logo?",
+        antwoorden: {
+            a: "Git",
+            b: "Visual Studio",
+            c: "Visual Studio Code",
+            d: "Linux Version Control"
+        },
+        extra: '<img src=pictures/programmaLogo.png>',
+        correcteAntwoord: "a"
+    },
 ];
 
 var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
