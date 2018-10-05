@@ -56,6 +56,7 @@ nav {
     font-size: 16px;
     padding: 0 1em 0 1em;
     position: sticky;
+    position: -webkit-sticky; /* Safari */
     top: 0; 
 }
 
