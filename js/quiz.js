@@ -2,7 +2,7 @@
 "use strict";
 
 /**
- * Deze constante bevat alle vragen van de quiz en is dynamisch uit te breiden.
+ * This constant contains all questions to the quiz.
  */
 const QUIZ_VRAGEN = [
     {
@@ -250,19 +250,31 @@ const QUIZ_VRAGEN = [
     }, 
 ];
 
-var vraagNummer = 0; // Deze variabele houdt bij bij welke vraag we zijn.
-var antwoorden = []; // Deze variabele houdt de antwoorden bij die de gebruiker geeft.
-var isCorrect = []; // Deze variabele houdt antwoorden bij als true of false.
-var alreadyPlayed = [];
-var answerButtonClickable, studentInfo, startTime, endTime, leaderboard;
+var questionNumber = 0; // This variable keeps track of at which question we are.
+var answers = []; // This array stores the answers given by the player.
+var isCorrect = []; // This array stores if the answers given are correct.
+var alreadyPlayed = []; // This array stores the student numbers of people who already played the quiz and prevents them from playing again.
+var answerButtonClickable; // This boolean makes sure that the answer buttons can't be pressed when looking back etc.
+var studentInfo; // This array stores the student data retrieved from the API to be used in different parts of the quiz.
+var startTime, endTime; // These variables keep track of the times (since 1970). endTime - startTime = quiz time.
+var leaderboard; // This array globally stores the leaderboard, retrieved from the API.
 
-// Converteert milliseconden naar minuten en seconden, met dank aan https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
+/**
+ * Converts milliseconds to minutes and seconds, for the end screen.
+ * Thanks to https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript 
+ * @param {integer} millis Time in milliseconds 
+ */
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = Math.floor((millis % 60000) / 1000);
     return minutes + (minutes = 1 ? ' minuut en ' : ' minuten en ') + seconds + " seconden";
 }
 
+/**
+ * Converts seconds to minutes and seconds.
+ * Used on the leaderboard.
+ * @param {integer} inputseconds Time in seconds
+ */
 function secondsToMinutesAndSeconds(inputseconds) {
     var minutes = Math.floor(inputseconds / 60);
     var seconds = Math.floor(inputseconds % 60);
@@ -270,7 +282,8 @@ function secondsToMinutesAndSeconds(inputseconds) {
 }
 
 /**
- * Get leaderboard  
+ * Gets leaderboard from API
+ * and calls two other functions to sort and show the leaderboard.
  */
 function getLeaderBoard() {
     var xHttp = new XMLHttpRequest();
@@ -297,6 +310,7 @@ function getLeaderBoard() {
 /**
  * Sort array by value in objects (https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript)
  * and then creates the leaderboard .
+ * @param {array} array Array to be sorted, in this case the leaderboard. 
  */
 function sortLeaderboard(array) {
     function compare(a,b) {
@@ -310,7 +324,9 @@ function sortLeaderboard(array) {
     leaderboard = array;
 }
 
-
+/**
+ * Uses the leaderboard array to make an array of student numbers that have already played.
+ */
 function makeAlreadyPlayedArray() {
     alreadyPlayed = [];
     getLeaderBoard();
@@ -319,6 +335,10 @@ function makeAlreadyPlayedArray() {
     }
 }
 
+/**
+ * Checks if student number has already played the quiz.
+ * @param {string} num Student number given
+ */
 function checkAlreadyPlayed(num) {
     makeAlreadyPlayedArray();
 
@@ -330,7 +350,10 @@ function checkAlreadyPlayed(num) {
 }
 
 /**
- * Function to send score to leaderboard 
+ * Sends score of the player to the Quiz-API.
+ * @param {string} student Student number of player
+ * @param {*} points Points of player
+ * @param {*} time Time the player has spent
  */
 function sendScore(student, points, time) {
     var xHttp = new XMLHttpRequest();
@@ -363,7 +386,9 @@ function sendScore(student, points, time) {
 
 
 /**
- * Check student number using the API (copied from US10)
+ * Check if student number exists using the API (copied from US10)
+ * and returns with either one of two functions.
+ * @param {string} number Student number given
  */
 function checkStudent(number) {
     var xHttp = new XMLHttpRequest();
@@ -386,6 +411,8 @@ function checkStudent(number) {
 
 /**
  * Student is successfully identified (copied from US10)
+ * Quiz gets started the the timer begins.
+ * @param {string} student Student number
  */
 function studentIdentificationSucces(student) {
     var loginStatus = document.getElementById('login-status');
@@ -407,6 +434,7 @@ function studentIdentificationSucces(student) {
 
 /**
  * Student number is incorrect (copied from US10)
+ * @param {*} errorMessage Error message from API
  */
 function studentIdentificationFailed(errorMessage) {
     var loginStatus = document.getElementById('login-status');
@@ -421,7 +449,9 @@ function studentIdentificationFailed(errorMessage) {
 
 
 /**
- * Deze functie telt het aantal juiste antwoorden. Dit heb ik later nodig.
+ * Counts the amount of trues in an array.
+ * Used in the quiz to count the amount of points.
+ * @param {array} array Array, in this case the isCorrect array
  */
 function countTrue(array) {
     var onlyTrue = array.filter(value => value === true);
@@ -430,7 +460,7 @@ function countTrue(array) {
 }
 
 /**
- * Deze functie maakt alle knoppen niet-bold.
+ * Makes all buttons on the nav bar un-bold.
  */
 function unBoldAllButtons() {
     var navButtons = document.getElementsByClassName('nav-button');
@@ -441,7 +471,8 @@ function unBoldAllButtons() {
 }
 
 /**
- * Deze functie maakt de navigatieknoppen bold op basis van op welke pagina je bent.
+ * Makes chosen nav button bold.
+ * @param {*} btn name of button
  */
 function boldButton(btn) {
     btn.style.fontWeight = 'bold' ;
@@ -507,15 +538,15 @@ function addButtonActions() {
         goToNextQuestion(); 
     });
     currentQuestion.addEventListener("click", function () {
-        showQuestion(vraagNummer);
+        showQuestion(questionNumber);
     });
     previousQuestion.addEventListener("click", function () {
-        showPreviousQuestion(vraagNummer);
+        showPreviousQuestion(questionNumber);
     });
 }
 
 /**
- * Hide all pages and the score bar
+ * Hide all pages, the score bar and the nav bar.
  */
 function hideAllPages() {
     var startPage = document.getElementById('page-start');
@@ -553,6 +584,9 @@ function showStartPage() {
     console.info('Je bent nu op de startpagina');
 }
 
+/**
+ * Show leaderboard page and gets leaderboard
+ */
 function showLeaderboardPage() {
     var page = document.getElementById("page-leaderboard");
     var leaderboardButton = document.getElementById("button-leaderboard");
@@ -571,7 +605,9 @@ function showLeaderboardPage() {
     console.info("Je bent nu op de leaderboard-pagina.");
 }
 
-
+/**
+ * Shows the entries of the leaderboard itself.
+ */
 function showLeaderboard() {
     var LB1 = document.getElementById("lb1");
     var LB2 = document.getElementById("lb2");
@@ -628,7 +664,7 @@ function showQuestionsPage() {
     page.style.display = 'block';
     scoreBar.style.display = 'block';
     unBoldAllButtons();
-    showQuestion(vraagNummer);
+    showQuestion(questionNumber);
     updateScoreCounter();
 
     console.info('Je bent nu op de vragenpagina');
@@ -675,17 +711,15 @@ function showEndPage() {
     } else if ((score / total) >= 0.5) {
         endResult.innerHTML = "Je hebt (meer dan) de helft goed 😃. Voldoende.";
     } else {
-        endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed.";
-        var audio = new Audio('pictures/loss.ogg');
-        audio.volume = 0.5;
-        audio.play();
+        endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed. </br> <audio controls><source src='pictures/loss.ogg' type='audio/ogg'></audio>";
     }
 
     console.info('Je bent nu op de eindpagina van de quiz.');
 }
 
 /**
- * Deze functie laat de vraag zien in de vragenpagina.
+ * Shows the question on the question page using innerHTML.
+ * @param {*} num (Current) question number
  */
 function showQuestion(num) {
     var allAnswerButtons = document.getElementsByClassName("answer-button");
@@ -727,7 +761,8 @@ function showQuestion(num) {
 
 
 /**
- * Deze functie laat de speler terug kijken op de vorige vraag
+ * Allows the player to look back to the previous question.
+ * @param {*} num  Number of current question
  */
 function showPreviousQuestion(num) {
     var questionTitle = document.getElementById("question-title");
@@ -756,11 +791,11 @@ function showPreviousQuestion(num) {
     }
 
     var pressedButton;
-    if (antwoorden[num - 1] == "a") {
+    if (answers[num - 1] == "a") {
         pressedButton = answerButtonA;
-    } else if (antwoorden[num - 1] == "b") {
+    } else if (answers[num - 1] == "b") {
         pressedButton = answerButtonB;
-    } else if (antwoorden[num - 1] == "c") {
+    } else if (answers[num - 1] == "c") {
         pressedButton = answerButtonC;
     } else {
         pressedButton = answerButtonD;
@@ -789,6 +824,9 @@ function showPreviousQuestion(num) {
     }
 }
 
+/**
+ * Updates the score counter shown on top of the screeen while playing the quiz.
+ */
 function updateScoreCounter() {
     var scoreCounter = document.getElementById("score-counter");
     var score = countTrue(isCorrect);
@@ -800,12 +838,13 @@ function updateScoreCounter() {
 
 
 /**
- * Deze functie definieert wat er gebeurt als je op een van de knoppen drukt.
- * Hierdoor gebeuren een aantal dingen die ik de 'feedback-flow' noem.
- * Daardoor kan de gebruiker het antwoord evalueren.
+ * What happens when one of the buttons get pressed.
+ * First, the answer gets checked with an if-sequence.
+ * Then, by coloring the buttons, the player can reflect on the answer given.
+ * @param {string} answer either a, b, c or d, given by the buttons.
  */
 function answerPressed(answer) {
-    var correct = QUIZ_VRAGEN[vraagNummer].correcteAntwoord;
+    var correct = QUIZ_VRAGEN[questionNumber].correcteAntwoord;
     var feedback = document.getElementById('feedback');
 
     var answerButtonA = document.getElementById('answerA');
@@ -846,12 +885,12 @@ function answerPressed(answer) {
     // Als het fout is, wordt dat opgeslagen en wordt het foute antwoord ook gemarkeerd.
     if (answer == correct) {
         feedback.innerHTML = "Goed. 👍";
-        antwoorden.push(answer);
+        answers.push(answer);
         isCorrect.push(true);
         correctButton.style.background = "rgb(51, 153, 51)";
     } else {
         feedback.innerHTML = "Fout. 👎";
-        antwoorden.push(answer);
+        answers.push(answer);
         isCorrect.push(false);
         correctButton.style.background = "rgb(51, 153, 51)";
         pressedButton.style.background = "rgb(204, 0, 0)";
@@ -862,15 +901,18 @@ function answerPressed(answer) {
     previousQuestion.style.display = 'none';
 }
 
+/**
+ * Function called by the "Volgende vraag" button.
+ */
 function goToNextQuestion() {
-    vraagNummer++;
+    questionNumber++;
 
 
 
-    if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
+    if (QUIZ_VRAGEN[questionNumber] == null) { // hiermee herken ik of de quiz klaar is.
         showEndPage();
     } else {
-        showQuestion(vraagNummer);
+        showQuestion(questionNumber);
     }
 }
 
