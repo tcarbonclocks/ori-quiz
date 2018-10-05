@@ -1,4 +1,5 @@
-"use strict"
+/*jshint esversion: 6 */
+"use strict";
 
 /**
  * Deze constante bevat alle vragen van de quiz en is dynamisch uit te breiden.
@@ -34,10 +35,10 @@ const QUIZ_VRAGEN = [
             c: "het gou",
             d: "ouden p"
         },
-        extra: '<code>\
-            var text = "het gouden paleis";</br>\
-            window.alert(text.substr(5, 7)\
-        </code>',
+        extra: '<code>' +
+        '    var text = "het gouden paleis";</br>' +
+        '    window.alert(text.substr(5, 7)' +
+        '</code>',
         correcteAntwoord: "d"
     },
     {
@@ -48,10 +49,10 @@ const QUIZ_VRAGEN = [
             c: "false en true",
             d: "false en false"
         },
-        extra: '<code>\
-            window.alert(9 == "9");</br>\
-            window.alert(9 === "9")\
-        </code>',
+        extra: '<code>' +
+        '    window.alert(9 == "9");</br>' +
+        '    window.alert(9 === "9")' +
+        '</code>',
         correcteAntwoord: "b"
     },
     {
@@ -73,18 +74,18 @@ const QUIZ_VRAGEN = [
             c: "rugTas.schoolTas[1]",
             d: "rugTas.schoolTas.1"
         },
-        extra: '<code>\
-        var rugTas = { </br>\
-            boodschappenTas: {</br>\
-                broodZakje: ["pistolets", "croissants"],</br>\
-                fruitZakje: {</br>\
-                    perenZakje: ["peer 1", "peer 2", "peer3"],</br>\
-                    appelZakje: ["peer 4", "voordeelbon", "appel 1"]</br>\
-                },</br>\
-            },</br>\
-            schoolTas: ["collegeblok", "mijnAppel", "etui", "portaal naar andere dimensie"],</br>\
-        };\
-        </code>',
+        extra: '<code>' +
+        'var rugTas = { </br>' +
+        '    boodschappenTas: {</br>' +
+        '        broodZakje: ["pistolets", "croissants"],</br>' +
+        '       fruitZakje: {</br>' +
+        '            perenZakje: ["peer 1", "peer 2", "peer3"],</br>' +
+        '            appelZakje: ["peer 4", "voordeelbon", "appel 1"]</br>' +
+        '        },</br>' +
+        '    },</br>' +
+        '    schoolTas: ["collegeblok", "mijnAppel", "etui", "portaal naar andere dimensie"],</br>' +
+        '};' +
+        '</code>',
         correcteAntwoord: "c"
     },
     {
@@ -106,9 +107,9 @@ const QUIZ_VRAGEN = [
             c: ":mousecheck",
             d: ".hover"
         },
-        extra: '<video autoplay loop muted>\
-        <source src="pictures/hoverEffect.mp4" type="video/mp4">\
-        </video>',
+        extra: '<video autoplay loop muted>' +
+        '<source src="pictures/hoverEffect.mp4" type="video/mp4">' +
+        '</video>',
         correcteAntwoord: "b"
     },
     {
@@ -119,9 +120,9 @@ const QUIZ_VRAGEN = [
             c: "start.style.display = 'none'",
             d: "start.show = 'none'"
         },
-        extra: '<video width=320 autoplay loop muted>\
-        <source src="pictures/displayNone.mp4" type="video/mp4">\
-        </video>',
+        extra: '<video width=320 autoplay loop muted>' +
+        '<source src="pictures/displayNone.mp4" type="video/mp4">' +
+        '</video>',
         correcteAntwoord: "c"
     },
     {
@@ -165,9 +166,9 @@ const QUIZ_VRAGEN = [
             c: "button.body.style.background = 'green'",
             d: "button.background = 'green'"
         },
-        extra: '<video width=320 autoplay loop muted>\
-        <source src="pictures/green.mp4" type="video/mp4">\
-        </video>',
+        extra: '<video width=320 autoplay loop muted>' +
+        '<source src="pictures/green.mp4" type="video/mp4">' +
+        '</video>',
         correcteAntwoord: "a"
     },
     {
@@ -260,13 +261,13 @@ function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = Math.floor((millis % 60000) / 1000);
     return minutes + (minutes = 1 ? ' minuut en ' : ' minuten en ') + seconds + " seconden";
-};
+}
 
 function secondsToMinutesAndSeconds(inputseconds) {
     var minutes = Math.floor(inputseconds / 60);
     var seconds = Math.floor(inputseconds % 60);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-};
+}
 
 /**
  * Get leaderboard  
@@ -283,15 +284,15 @@ function getLeaderBoard() {
                 showLeaderboard();
             } else {
                 console.error(response);
-            };
-        };
+            }
+        }
     };
     xHttp.onerror = function () {
-        console.error(xHttp.statusText)
+        console.error(xHttp.statusText);
     };
     xHttp.open("GET", "https://quiz.clow.nl/v1/highscores/s1132653", true);
     xHttp.send();
-};
+}
 
 /**
  * Sort array by value in objects (https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript)
@@ -304,10 +305,10 @@ function sortLeaderboard(array) {
         if (b.points > a.points)
           return 1;
         return 0;
-    };
+    }
     array.sort(compare);
     leaderboard = array;
-};
+}
 
 
 function makeAlreadyPlayedArray() {
@@ -315,8 +316,8 @@ function makeAlreadyPlayedArray() {
     getLeaderBoard();
     for (var i = 0; i < leaderboard.length; i++) {
         alreadyPlayed.push(leaderboard[i].player.number);
-    };
-};
+    }
+}
 
 function checkAlreadyPlayed(num) {
     makeAlreadyPlayedArray();
@@ -325,8 +326,8 @@ function checkAlreadyPlayed(num) {
         return true;
     } else {
         return false;
-    };
-};
+    }
+}
 
 /**
  * Function to send score to leaderboard 
@@ -350,7 +351,7 @@ function sendScore(student, points, time) {
         console.error("Score niet succesvol opgeslagen");
     };
 
-    xHttp.open("POST", "https://quiz.clow.nl/v1/score", true)
+    xHttp.open("POST", "https://quiz.clow.nl/v1/score", true);
     xHttp.setRequestHeader('Content-Type', 'application/json');
     xHttp.send(JSON.stringify({
         quizMaster: "s1132653",
@@ -358,7 +359,7 @@ function sendScore(student, points, time) {
         points: points,
         time: time,
     }));
-};
+}
 
 
 /**
@@ -393,14 +394,14 @@ function studentIdentificationSucces(student) {
 
     // Schrijf hier de code die uitgevoerd moet worden als het studentnummer klopt
 
-    loginStatus.style.color = "rgb(51, 153, 51)"
+    loginStatus.style.color = "rgb(51, 153, 51)";
     loginStatus.innerHTML = "Welkom " + student.firstName + " " + student.lastName + ". Veel succes met de quiz.";
     studentInfo = student;
 
     setTimeout(function () {
         showQuestionsPage();
         startTime = Date.now();
-    }, 3000)
+    }, 3000);
 
 }
 
@@ -423,10 +424,10 @@ function studentIdentificationFailed(errorMessage) {
  * Deze functie telt het aantal juiste antwoorden. Dit heb ik later nodig.
  */
 function countTrue(array) {
-    var onlyTrue = array.filter(value => value == true);
+    var onlyTrue = array.filter(value => value === true);
     var amountOfTrues = onlyTrue.length;
     return amountOfTrues;
-};
+}
 
 /**
  * Deze functie maakt alle knoppen niet-bold.
@@ -475,30 +476,30 @@ function addButtonActions() {
         showLoginPage();
     });
     checkButton.addEventListener("click", function () {
-        if (checkAlreadyPlayed(studentNumber.value) == true) {
+        if (checkAlreadyPlayed(studentNumber.value) === true) {
             loginStatus.style.color = "rgb(204, 0, 0)";
             loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
         } else {
             checkStudent(studentNumber.value);
-        };
+        }
     });
     answerButtonA.addEventListener("click", function () {
-        if (answerButtonClickable == true) {
+        if (answerButtonClickable === true) {
             answerPressed("a");
         }
     });
     answerButtonB.addEventListener("click", function () {
-        if (answerButtonClickable == true) {
+        if (answerButtonClickable === true) {
             answerPressed("b");
         }
     });
     answerButtonC.addEventListener("click", function () {
-        if (answerButtonClickable == true) {
+        if (answerButtonClickable === true) {
             answerPressed("c");
         }
     });
     answerButtonD.addEventListener("click", function () {
-        if (answerButtonClickable == true) {
+        if (answerButtonClickable === true) {
             answerPressed("d");
         }
     });
@@ -511,7 +512,7 @@ function addButtonActions() {
     previousQuestion.addEventListener("click", function () {
         showPreviousQuestion(vraagNummer);
     });
-};
+}
 
 /**
  * Hide all pages and the score bar
@@ -550,7 +551,7 @@ function showStartPage() {
     boldButton(startButton);
 
     console.info('Je bent nu op de startpagina');
-};
+}
 
 function showLeaderboardPage() {
     var page = document.getElementById("page-leaderboard");
@@ -568,7 +569,7 @@ function showLeaderboardPage() {
     getLeaderBoard();
 
     console.info("Je bent nu op de leaderboard-pagina.");
-};
+}
 
 
 function showLeaderboard() {
@@ -593,7 +594,7 @@ function showLeaderboard() {
     LB8.innerHTML = leaderboard[7].player.firstName + " " + leaderboard[7].player.lastName + " (" + leaderboard[7].player.number + "), " + leaderboard[7].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[7].time);
     LB9.innerHTML = leaderboard[8].player.firstName + " " + leaderboard[8].player.lastName + " (" + leaderboard[8].player.number + "), " + leaderboard[8].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[8].time);
     LB10.innerHTML = leaderboard[9].player.firstName + " " + leaderboard[9].player.lastName + " (" + leaderboard[9].player.number + "), " + leaderboard[9].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[9].time);
-};
+}
 
 /**
  * Show login page
@@ -612,8 +613,8 @@ function showLoginPage() {
     unBoldAllButtons();
     boldButton(loginButton);
 
-    console.info('Je bent nu op de loginpagina.')
-};
+    console.info('Je bent nu op de loginpagina.');
+}
 
 /**
  * Show questions page
@@ -627,11 +628,11 @@ function showQuestionsPage() {
     page.style.display = 'block';
     scoreBar.style.display = 'block';
     unBoldAllButtons();
-    showQuestion(vraagNummer)
-    updateScoreCounter()
+    showQuestion(vraagNummer);
+    updateScoreCounter();
 
     console.info('Je bent nu op de vragenpagina');
-};
+}
 
 /**
  * Show end page that appears after all questions have been answered
@@ -644,6 +645,7 @@ function showEndPage() {
     var endScore = document.getElementById('end-score');
     var endTimeElapsed = document.getElementById('end-time-elapsed');
     var endResult = document.getElementById('end-result');
+    var sendScoreResult = document.getElementById('sendscore-result');
 
     var score = countTrue(isCorrect);
     var total = QUIZ_VRAGEN.length;
@@ -663,7 +665,7 @@ function showEndPage() {
     } else {
         sendScoreResult.innerHTML = "Door een fout kon je score jammer genoeg niet opgeslagen worden.";
         console.error("Tijd te lang of te kort"); 
-    };
+    }
 
     endIntro.innerHTML = "Je bent bij het einde van de quiz gekomen, " + studentInfo.firstName + ".";
     endScore.innerHTML = "Je hebt in totaal " + score + " vragen van de " + total + " goed beantwoord.";
@@ -673,14 +675,14 @@ function showEndPage() {
     } else if ((score / total) >= 0.5) {
         endResult.innerHTML = "Je hebt (meer dan) de helft goed 😃. Voldoende.";
     } else {
-        endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed."
+        endResult.innerHTML = "Jammer 😔! Je hebt minder dan de helft goed.";
         var audio = new Audio('pictures/loss.ogg');
         audio.volume = 0.5;
         audio.play();
     }
 
     console.info('Je bent nu op de eindpagina van de quiz.');
-};
+}
 
 /**
  * Deze functie laat de vraag zien in de vragenpagina.
@@ -711,17 +713,17 @@ function showQuestion(num) {
     answerButtonB.innerHTML = "b. " + QUIZ_VRAGEN[num].antwoorden.b;
     answerButtonC.innerHTML = "c. " + QUIZ_VRAGEN[num].antwoorden.c;
     answerButtonD.innerHTML = "d. " + QUIZ_VRAGEN[num].antwoorden.d;
-    feedback.innerHTML = ""
+    feedback.innerHTML = "";
 
     answerButtonClickable = true;
     nextQuestion.style.display = 'none';
     currentQuestion.style.display = 'none';
-    if (num == 0) {
+    if (num === 0) {
         previousQuestion.style.display = 'none';
     } else {
         previousQuestion.style.display = 'inline-block';
-    };
-};
+    }
+}
 
 
 /**
@@ -751,7 +753,7 @@ function showPreviousQuestion(num) {
         correctButton = answerButtonC;
     } else {
         correctButton = answerButtonD;
-    };
+    }
 
     var pressedButton;
     if (antwoorden[num - 1] == "a") {
@@ -762,7 +764,7 @@ function showPreviousQuestion(num) {
         pressedButton = answerButtonC;
     } else {
         pressedButton = answerButtonD;
-    };
+    }
 
     questionTitle.innerHTML = "Vraag " + (num - 1);
     question.innerHTML = QUIZ_VRAGEN[num - 1].vraag;
@@ -777,15 +779,15 @@ function showPreviousQuestion(num) {
     currentQuestion.style.display = 'inline-block';
     previousQuestion.style.display = 'none';
 
-    if (isCorrect[num - 1] == false) {
+    if (isCorrect[num - 1] === false) {
         correctButton.style.background = "rgb(51, 153, 51)";
         pressedButton.style.background = "rgb(204, 0, 0)";
         feedback.innerHTML = "Fout. 👎";
     } else {
         correctButton.style.background = "rgb(51, 153, 51)";
         feedback.innerHTML = "Goed. 👍"; 
-    };
-};
+    }
+}
 
 function updateScoreCounter() {
     var scoreCounter = document.getElementById("score-counter");
@@ -794,7 +796,7 @@ function updateScoreCounter() {
 
     scoreCounter.innerHTML = score + " van de " + total + " punten, ingelogd als " + studentInfo.firstName + " " + studentInfo.lastName + " ("+ studentInfo.number + ")";
 
-};
+}
 
 
 /**
@@ -824,7 +826,7 @@ function answerPressed(answer) {
         correctButton = answerButtonC;
     } else {
         correctButton = answerButtonD;
-    };
+    }
 
     var pressedButton;
     if (answer == "a") {
@@ -835,7 +837,7 @@ function answerPressed(answer) {
         pressedButton = answerButtonC;
     } else {
         pressedButton = answerButtonD;
-    };
+    }
 
 
     answerButtonClickable = false;
@@ -853,12 +855,12 @@ function answerPressed(answer) {
         isCorrect.push(false);
         correctButton.style.background = "rgb(51, 153, 51)";
         pressedButton.style.background = "rgb(204, 0, 0)";
-    };
+    }
     updateScoreCounter();
     nextQuestion.style.display = "inline-block";
     currentQuestion.style.display = 'none';
     previousQuestion.style.display = 'none';
-};
+}
 
 function goToNextQuestion() {
     vraagNummer++;
@@ -868,7 +870,7 @@ function goToNextQuestion() {
     if (QUIZ_VRAGEN[vraagNummer] == null) { // hiermee herken ik of de quiz klaar is.
         showEndPage();
     } else {
-        showQuestion(vraagNummer)
+        showQuestion(vraagNummer);
     }
 }
 
@@ -876,4 +878,4 @@ function goToNextQuestion() {
 addButtonActions();
 showStartPage();
 boldButton(document.getElementById('button-start'));
-console.info("Misschien werkt het geheime commando... 😉")
+console.info("Misschien werkt het geheime commando... 😉");
