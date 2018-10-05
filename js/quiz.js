@@ -1,8 +1,6 @@
 /*jshint esversion: 6 */
 "use strict";
 
-
-
 var questionNumber = 0; // This variable keeps track of at which question we are.
 var answers = []; // This array stores the answers given by the player.
 var isCorrect = []; // This array stores if the answers given are correct.
@@ -261,8 +259,9 @@ function addButtonActions() {
     });
     checkButton.addEventListener("click", function () {
         if (checkAlreadyPlayed(studentNumber.value) === true) {
-            loginStatus.style.color = "rgb(204, 0, 0)";
-            loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
+            // loginStatus.style.color = "rgb(204, 0, 0)";
+            // loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
+            checkStudent(studentNumber).value;
         } else {
             checkStudent(studentNumber.value);
         }
