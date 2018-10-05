@@ -258,13 +258,13 @@ function addButtonActions() {
         showLoginPage();
     });
     checkButton.addEventListener("click", function () {
-        if (checkAlreadyPlayed(studentNumber.value) === true) {
+        // if (checkAlreadyPlayed(studentNumber.value) === true) {
             // loginStatus.style.color = "rgb(204, 0, 0)";
             // loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
-            checkStudent(studentNumber.value);
-        } else {
-            checkStudent(studentNumber.value);
-        }
+        // } else {
+            // checkStudent(studentNumber.value);
+        // }
+        checkStudent(studentNumber.value);
     });
     answerButtonA.addEventListener("click", function () {
         if (answerButtonClickable === true) {
