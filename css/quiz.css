@@ -104,6 +104,7 @@ nav {
     background-color: rgb(17, 17, 17);
 }
 
+/* Stijl voor de vraag-actieknoppen (volgende, vorige, huidige) */
 .question-actions {
     display: inline-block;
     color: #DDDDDD;
@@ -117,10 +118,11 @@ nav {
     font-weight: bold;
 }
 
-#next-question:hover {
+.question-actions:hover {
     background-color: rgb(17, 17, 17);
 }
 
+/* Vragenextras niet te breed te maken, om goed te werken op apparaten met een kleiner scherm. */
 #question-extras {
     width: 300px;
     max-height: 100%;
