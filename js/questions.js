@@ -104,7 +104,7 @@ const QUIZ_VRAGEN = [
             c: ":mousecheck",
             d: ".hover"
         },
-        extra: '<video autoplay loop muted>' +
+        extra: '<video autoplay loop muted playsinline>' +
         '<source src="pictures/hoverEffect.mp4" type="video/mp4">' +
         '</video>',
         correcteAntwoord: "b"
@@ -117,7 +117,7 @@ const QUIZ_VRAGEN = [
             c: "start.style.display = 'none'",
             d: "start.show = 'none'"
         },
-        extra: '<video width=320 autoplay loop muted>' +
+        extra: '<video width=320 autoplay loop muted playsinline>' +
         '<source src="pictures/displayNone.mp4" type="video/mp4">' +
         '</video>',
         correcteAntwoord: "c"
@@ -163,7 +163,7 @@ const QUIZ_VRAGEN = [
             c: "button.body.style.background = 'green'",
             d: "button.background = 'green'"
         },
-        extra: '<video width=320 autoplay loop muted>' +
+        extra: '<video width=320 autoplay loop muted playsinline>' +
         '<source src="pictures/green.mp4" type="video/mp4">' +
         '</video>',
         correcteAntwoord: "a"
