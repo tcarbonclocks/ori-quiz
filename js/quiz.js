@@ -18,7 +18,7 @@ var leaderboard; // This array globally stores the leaderboard, retrieved from t
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = Math.floor((millis % 60000) / 1000);
-    return minutes + (minutes = 1 ? ' minuut en ' : ' minuten en ') + seconds + " seconden";
+    return minutes + (minutes == 1 ? ' minuut en ' : ' minuten en ') + seconds + " seconden";
 }
 
 /**
