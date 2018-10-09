@@ -361,8 +361,34 @@ function showLeaderboardPage() {
  * Shows the entries of the leaderboard itself.
  */
 function showLeaderboard() {
+<<<<<<< HEAD
     var LB = document.getElementsByClassName("leaderboardentry");
 
+=======
+    var LB1 = document.getElementById("lb1");
+    var LB2 = document.getElementById("lb2");
+    var LB3 = document.getElementById("lb3");
+    var LB4 = document.getElementById("lb4");
+    var LB5 = document.getElementById("lb5");
+    var LB6 = document.getElementById("lb6");
+    var LB7 = document.getElementById("lb7");
+    var LB8 = document.getElementById("lb8");
+    var LB9 = document.getElementById("lb9");
+    var LB10 = document.getElementById("lb10");
+    var LB = document.getElementsByClassName("leaderboardentry");
+
+    // LB1.innerHTML = leaderboard[0].player.firstName + " " + leaderboard[0].player.lastName + " (" + leaderboard[0].player.number + "), " + leaderboard[0].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[0].time);
+    // LB2.innerHTML = leaderboard[1].player.firstName + " " + leaderboard[1].player.lastName + " (" + leaderboard[1].player.number + "), " + leaderboard[1].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[1].time);
+    // LB3.innerHTML = leaderboard[2].player.firstName + " " + leaderboard[2].player.lastName + " (" + leaderboard[2].player.number + "), " + leaderboard[2].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[2].time);
+    // LB4.innerHTML = leaderboard[3].player.firstName + " " + leaderboard[3].player.lastName + " (" + leaderboard[3].player.number + "), " + leaderboard[3].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[3].time);
+    // LB5.innerHTML = leaderboard[4].player.firstName + " " + leaderboard[4].player.lastName + " (" + leaderboard[4].player.number + "), " + leaderboard[4].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[4].time);
+    // LB6.innerHTML = leaderboard[5].player.firstName + " " + leaderboard[5].player.lastName + " (" + leaderboard[5].player.number + "), " + leaderboard[5].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[5].time);
+    // LB7.innerHTML = leaderboard[6].player.firstName + " " + leaderboard[6].player.lastName + " (" + leaderboard[6].player.number + "), " + leaderboard[6].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[6].time);
+    // LB8.innerHTML = leaderboard[7].player.firstName + " " + leaderboard[7].player.lastName + " (" + leaderboard[7].player.number + "), " + leaderboard[7].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[7].time);
+    // LB9.innerHTML = leaderboard[8].player.firstName + " " + leaderboard[8].player.lastName + " (" + leaderboard[8].player.number + "), " + leaderboard[8].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[8].time);
+    // LB10.innerHTML = leaderboard[9].player.firstName + " " + leaderboard[9].player.lastName + " (" + leaderboard[9].player.number + "), " + leaderboard[9].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[9].time);
+
+>>>>>>> 9f08ad73146596a6c2ef2fe7fffbcd69ef3700d2
     for (var i = 0; i < LB.length; i++) {
         LB[i].innerHTML = leaderboard[i].player.firstName + " " + leaderboard[i].player.lastName + " (" + leaderboard[i].player.number + "), " + leaderboard[i].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[i].time);
     }
