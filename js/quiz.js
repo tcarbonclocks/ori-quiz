@@ -364,7 +364,7 @@ function showLeaderboard() {
     var LB = document.getElementsByClassName("leaderboardentry");
 
     for (var i = 0; i < LB.length; i++) {
-        LB[i].innerHTML = leaderboard[i].player.firstName + " " + leaderboard[i].player.lastName + " (" + leaderboard[i].player.number + "), " + leaderboard[i].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[i].time);
+        LB[i].innerHTML = leaderboard[i].player.firstName + " " + leaderboard[i].player.lastName + ", " + leaderboard[i].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[i].time);
     }
 }
 
