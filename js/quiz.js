@@ -454,8 +454,6 @@ function addButtonActions() {
     var checkButton = document.getElementById('check-number');
     var studentNumber = document.getElementById('studentnummer');
 
-    var loginStatus = document.getElementById('login-status');
-
     startButton.addEventListener("click", function () {
         showStartPage();
     });
@@ -476,7 +474,7 @@ function addButtonActions() {
         // Detect if enter key (key 13) is pressed
         if (event.keyCode === 13) {
             checkStudent(studentNumber.value);
-        };
+        }
     });
     answerButtonA.addEventListener("click", function () {
         if (answerButtonClickable === true) {
@@ -574,9 +572,14 @@ function showLeaderboardPage() {
  */
 function showLeaderboard() {
     var LB = document.getElementsByClassName("leaderboardentry");
+    var LBError = document.getElementById("lberrortext");
 
-    for (var i = 0; i < LB.length; i++) {
-        LB[i].innerHTML = leaderboard[i].player.firstName + " " + leaderboard[i].player.lastName + ", " + leaderboard[i].points + " punten, " + secondsToMinutesAndSeconds(leaderboard[i].time);
+    try {
+        for (var i = 0; i < LB.length; i++) {
+            LB[i].innerHTML = leaderboard[i].player.firstName + " " + leaderboard[i].player.lastName + ", " + leaderboard[i].points + (leaderboard[i].points == 1 ? ' punt, ' : ' punten, ') + secondsToMinutesAndSeconds(leaderboard[i].time);
+        }
+    } catch(err) {
+        LBError.innerHTML = "De leaderboard is nog niet vol, doordat er nog niet genoeg spelers zijn.";
     }
 }
 
@@ -857,7 +860,7 @@ function goToNextQuestion() {
 
 
 
-    if (QUIZ_VRAGEN[questionNumber] == null) { // hiermee herken ik of de quiz klaar is.
+    if (QUIZ_VRAGEN[questionNumber] === undefined) { // hiermee herken ik of de quiz klaar is.
         showEndPage();
     } else {
         showQuestion(questionNumber);
