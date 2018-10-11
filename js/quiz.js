@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+"use strict";
 
 /**
  * This constant contains all questions to the quiz.
