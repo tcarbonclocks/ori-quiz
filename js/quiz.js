@@ -238,7 +238,6 @@ const CORRECTE_ANTWOORDEN = "YWJkYmRjYWJjYWNkYWJhYWJjZGI=";
 var questionNumber = 0; // This variable keeps track of at which question we are.
 var answers = []; // This array stores the answers given by the player.
 var isCorrect = []; // This array stores if the answers given are correct.
-var alreadyPlayed = []; // This array stores the student numbers of people who already played the quiz and prevents them from playing again.
 var answerButtonClickable; // This boolean makes sure that the answer buttons can't be pressed when looking back etc.
 var studentInfo; // This array stores the student data retrieved from the API to be used in different parts of the quiz.
 var startTime, endTime; // These variables keep track of the times (since 1970). endTime - startTime = quiz time.
@@ -307,31 +306,6 @@ function sortLeaderboard(array) {
     }
     array.sort(compare);
     leaderboard = array;
-}
-
-/**
- * Uses the leaderboard array to make an array of student numbers that have already played.
- */
-function makeAlreadyPlayedArray() {
-    alreadyPlayed = [];
-    getLeaderBoard();
-    for (var i = 0; i < leaderboard.length; i++) {
-        alreadyPlayed.push(leaderboard[i].player.number);
-    }
-}
-
-/**
- * Checks if student number has already played the quiz.
- * @param {string} num Student number given
- */
-function checkAlreadyPlayed(num) {
-    makeAlreadyPlayedArray();
-
-    if (alreadyPlayed.includes(num)) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 /**
@@ -492,13 +466,17 @@ function addButtonActions() {
         showLoginPage();
     });
     checkButton.addEventListener("click", function () {
-        // if (checkAlreadyPlayed(studentNumber.value) === true) {
-            // loginStatus.style.color = "rgb(204, 0, 0)";
-            // loginStatus.innerHTML = "Je mag de quiz niet meer dan 1 keer spelen.";
-        // } else {
-            // checkStudent(studentNumber.value);
-        // }
         checkStudent(studentNumber.value);
+    });
+    // also runs checkStudent if user presses the enter button, thanks to https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+    studentNumber.addEventListener("keyup", function (event) {
+        // Cancel default action
+        event.preventDefault();
+
+        // Detect if enter key (key 13) is pressed
+        if (event.keyCode === 13) {
+            checkStudent(studentNumber.value);
+        };
     });
     answerButtonA.addEventListener("click", function () {
         if (answerButtonClickable === true) {
