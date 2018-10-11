@@ -13,8 +13,7 @@ const QUIZ_VRAGEN = [
             c: "Wat is het geheime commando voor de console om alle antwoorden in te zien?",
             d: "Wat is het nummer van de volgende vraag?"
         },
-        extra: "<img src=pictures/nummerNul.png>",
-        correcteAntwoord: "a"
+        extra: "<img src=pictures/nummerNul.png>"
     },
     {
         vraag: "Hoe maak je een lijst met nummers in het begin?",
@@ -24,8 +23,7 @@ const QUIZ_VRAGEN = [
             c: "Met een ul-element",
             d: "Met een al-element"
         },
-        extra: "<img src=pictures/numberedlist.png>",
-        correcteAntwoord: "b"
+        extra: "<img src=pictures/numberedlist.png>"
     },
     {
         vraag: "Wat is de uitkomst van het onderste stuk JavaScript-code?",
@@ -38,8 +36,7 @@ const QUIZ_VRAGEN = [
         extra: '<code>' +
         '    var text = "het gouden paleis";</br>' +
         '    window.alert(text.substr(5, 7)' +
-        '</code>',
-        correcteAntwoord: "d"
+        '</code>'
     },
     {
         vraag: "Wat is de uitkomst van het onderste stuk JavaScript-code?",
@@ -52,8 +49,7 @@ const QUIZ_VRAGEN = [
         extra: '<code>' +
         '    window.alert(9 == "9");</br>' +
         '    window.alert(9 === "9")' +
-        '</code>',
-        correcteAntwoord: "b"
+        '</code>'
     },
     {
         vraag: "In welk bestand kan ik de grootte van de deze video veranderen?",
@@ -63,8 +59,7 @@ const QUIZ_VRAGEN = [
             c: "Het JavaScript-bestand",
             d: "Alledrie"
         },
-        extra: '<iframe src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
-        correcteAntwoord: "d"
+        extra: '<iframe src="https://www.youtube-nocookie.com/embed/ra6FtdXrH4Q?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
     },
     {
         vraag: "Hoe kom ik bij mijnAppel?",
@@ -85,8 +80,7 @@ const QUIZ_VRAGEN = [
         '    },</br>' +
         '    schoolTas: ["collegeblok", "mijnAppel", "etui", "portaal naar andere dimensie"],</br>' +
         '};' +
-        '</code>',
-        correcteAntwoord: "c"
+        '</code>'
     },
     {
         vraag: "Van welk programma is dit het logo?",
@@ -96,8 +90,7 @@ const QUIZ_VRAGEN = [
             c: "Visual Studio Code",
             d: "Linux Version Control"
         },
-        extra: '<img src=pictures/programmaLogo.png>',
-        correcteAntwoord: "a"
+        extra: '<img src=pictures/programmaLogo.png>'
     },
     {
         vraag: "Met wat kan ik in de CSS de achtergrondkleur veranderen als mijn muis over de knop zweeft?",
@@ -109,8 +102,7 @@ const QUIZ_VRAGEN = [
         },
         extra: '<video autoplay loop muted playsinline>' +
         '<source src="pictures/hoverEffect.mp4" type="video/mp4">' +
-        '</video>',
-        correcteAntwoord: "b"
+        '</video>'
     },
     {
         vraag: "Hoe kan ik de startpagina (variabele 'start') laten verdwijnen met JavaScript?",
@@ -122,8 +114,7 @@ const QUIZ_VRAGEN = [
         },
         extra: '<video width=320 autoplay loop muted playsinline>' +
         '<source src="pictures/displayNone.mp4" type="video/mp4">' +
-        '</video>',
-        correcteAntwoord: "c"
+        '</video>'
     },
     {
         vraag: "Hoe definieer ik een class in CSS?",
@@ -133,8 +124,7 @@ const QUIZ_VRAGEN = [
             c: ":class",
             d: "class"
         },
-        extra: "",
-        correcteAntwoord: "a"
+        extra: ""
     },
     {
         vraag: "Hoeveel vragen hebben we al gehad?",
@@ -144,8 +134,7 @@ const QUIZ_VRAGEN = [
             c: "Tien",
             d: "Elf"
         },
-        extra: "",
-        correcteAntwoord: "c"
+        extra: ""
     }, 
     {
         vraag: "Van boven naar onder, welke woorden missen hier?",
@@ -155,8 +144,7 @@ const QUIZ_VRAGEN = [
             c: "pading, border en margin",
             d: "margin, border en padding"
         },
-        extra: "<img src=pictures/boxModel.png>",
-        correcteAntwoord: "d"
+        extra: "<img src=pictures/boxModel.png>"
     },
     {
         vraag: "Hoe kan ik d.m.v. JavaScript deze knop (variabele 'button') een groene kleur geven?",
@@ -168,8 +156,7 @@ const QUIZ_VRAGEN = [
         },
         extra: '<video width=320 autoplay loop muted playsinline>' +
         '<source src="pictures/green.mp4" type="video/mp4">' +
-        '</video>',
-        correcteAntwoord: "a"
+        '</video>'
     },
     {
         vraag: "Hoe kan ik in Git mijn veranderingen naar de server uploaden?",
@@ -179,8 +166,7 @@ const QUIZ_VRAGEN = [
             c: "git upload",
             d: "git share"
         },
-        extra: '<img src=pictures/programmaLogo.png>',
-        correcteAntwoord: "b"
+        extra: '<img src=pictures/programmaLogo.png>'
     },
     {
         vraag: "Wat voor soort element is het h2-element?",
@@ -190,8 +176,7 @@ const QUIZ_VRAGEN = [
             c: "Een inline-block-element",
             d: "Een relative-element"
         },
-        extra: "",
-        correcteAntwoord: "a"
+        extra: ""
     },
     {
         vraag: "Wat voor datatype is dit?",
@@ -201,8 +186,7 @@ const QUIZ_VRAGEN = [
             c: "Een string",
             d: "Een multidimensionale array"
         },
-        extra: "<code>var HansBastiaan = {gender: 'male', teaches: 'ORI', likesArrays: true}</code>",
-        correcteAntwoord: "a"
+        extra: "<code>var HansBastiaan = {gender: 'male', teaches: 'ORI', likesArrays: true}</code>"
     },
     {
         vraag: "Wat is i++?",
@@ -212,8 +196,7 @@ const QUIZ_VRAGEN = [
             c: "i + 2",
             d: "ii"
         },
-        extra: "",
-        correcteAntwoord: "b"
+        extra: ""
     },
     {
         vraag: "Hoe zorg ik ervoor dat er niet meer dan 8 karakters in mijn input kunnen?",
@@ -223,8 +206,7 @@ const QUIZ_VRAGEN = [
             c: "maxlength='8'",
             d: "maxChracters='8'"
         },
-        extra: "<img src=pictures/textField.png>",
-        correcteAntwoord: "c"
+        extra: "<img src=pictures/textField.png>"
     },
     {
         vraag: "Hoe kan ik de waarde van deze input (variabele 'input') in een variabele stoppen?",
@@ -234,8 +216,7 @@ const QUIZ_VRAGEN = [
             c: "var content = input.content;",
             d: "var value = input.value;"
         },
-        extra: "<img src=pictures/textField.png>",
-        correcteAntwoord: "d"
+        extra: "<img src=pictures/textField.png>"
     },
     {
         vraag: "Wat is het datatype van de volgende variabele?",
@@ -245,10 +226,14 @@ const QUIZ_VRAGEN = [
             c: "Een string",
             d: "Een boolean"
         },
-        extra: "<code>var SuperClass = document.getElementsByClassName('class')</code>",
-        correcteAntwoord: "b"
+        extra: "<code>var SuperClass = document.getElementsByClassName('class')</code>"
     }, 
 ];
+
+/**
+ * This constant contains all correct answers. Yes, that's right.
+ */
+const CORRECTE_ANTWOORDEN = "YWJkYmRjYWJjYWNkYWJhYWJjZGI=";
 
 var questionNumber = 0; // This variable keeps track of at which question we are.
 var answers = []; // This array stores the answers given by the player.
@@ -762,7 +747,7 @@ function showPreviousQuestion(num) {
     var currentQuestion = document.getElementById('current-question');
     var previousQuestion = document.getElementById('previous-question');
 
-    var correct = QUIZ_VRAGEN[num - 1].correcteAntwoord;
+    var correct = atob(CORRECTE_ANTWOORDEN)[num -1];
 
     var correctButton;
     if (correct == "a") {
@@ -829,7 +814,7 @@ function updateScoreCounter() {
  * @param {string} answer either a, b, c or d, given by the buttons.
  */
 function answerPressed(answer) {
-    var correct = QUIZ_VRAGEN[questionNumber].correcteAntwoord;
+    var correct = atob(CORRECTE_ANTWOORDEN)[questionNumber];
     var feedback = document.getElementById('feedback');
 
     var answerButtonA = document.getElementById('answerA');
