@@ -48,7 +48,7 @@ const QUIZ_VRAGEN = [
         },
         extra: '<code>' +
         '    window.alert(9 == "9");</br>' +
-        '    window.alert(9 === "9"));' +
+        '    window.alert(9 === "9");' +
         '</code>'
     },
     {
