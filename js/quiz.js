@@ -35,7 +35,7 @@ const QUIZ_VRAGEN = [
         },
         extra: '<code>' +
         '    var text = "het gouden paleis";</br>' +
-        '    window.alert(text.substr(5, 7)' +
+        '    window.alert(text.substr(5, 7));' +
         '</code>'
     },
     {
