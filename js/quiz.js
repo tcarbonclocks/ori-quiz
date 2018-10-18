@@ -375,13 +375,14 @@ function checkStudent(number) {
  */
 function studentIdentificationSucces(student) {
     var loginStatus = document.getElementById('login-status');
-
+    var studentNumber = document.getElementById("studentnummer");
     console.info(student); // Een Javascript-object met studentnummer, voornaam en achternaam
 
     // Schrijf hier de code die uitgevoerd moet worden als het studentnummer klopt
 
     loginStatus.style.color = "rgb(51, 153, 51)";
     loginStatus.innerHTML = "Welkom " + student.firstName + " " + student.lastName + ". Veel succes met de quiz.";
+    studentNumber.setAttribute("readonly", true);
     studentInfo = student;
 
     setTimeout(function () {
