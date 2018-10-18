@@ -127,12 +127,12 @@ const QUIZ_VRAGEN = [
         extra: ""
     },
     {
-        vraag: "Hoeveel vragen hebben we al gehad?",
+        vraag: "Welke bewering is waar?",
         antwoorden: {
-            a: "Acht",
-            b: "Negen",
-            c: "Tien",
-            d: "Elf"
+            a: "We zijn bij de negende vraag en de maker heeft ergens 'vraagnummer - 1' vergeten.",
+            b: "We zijn bij de tiende vraag",
+            c: "We zijn bij de elfde vraag en de maker heeft ergens 'vraagnummer + 1' vergeten.",
+            d: "We zijn bij de twaalfde vraag"
         },
         extra: ""
     }, 
