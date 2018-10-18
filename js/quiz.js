@@ -345,6 +345,19 @@ function sendScore(student, points, time) {
 
 
 /**
+ * Before checking if the student number exists, this function checks if the input is empty.
+ * With this, I can avoid an error 500 from the API.
+ * @param {string} number 
+ */
+function checkIfEmpty(number) {
+    if (number == "") {
+        studentIdentificationFailed("Het kan niet leeg zijn.");
+    } else {
+        checkStudent(number);
+    }
+}
+
+/**
  * Check if student number exists using the API (copied from US10)
  * and returns with either one of two functions.
  * @param {string} number Student number given
@@ -465,7 +478,7 @@ function addButtonActions() {
         showLoginPage();
     });
     checkButton.addEventListener("click", function () {
-        checkStudent(studentNumber.value);
+        checkIfEmpty(studentNumber.value);
     });
     // also runs checkStudent if user presses the enter button, thanks to https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
     studentNumber.addEventListener("keyup", function (event) {
@@ -474,7 +487,7 @@ function addButtonActions() {
 
         // Detect if enter key (key 13) is pressed
         if (event.keyCode === 13) {
-            checkStudent(studentNumber.value);
+            checkIfEmpty(studentNumber.value);
         }
     });
     answerButtonA.addEventListener("click", function () {
