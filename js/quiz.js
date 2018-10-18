@@ -350,7 +350,7 @@ function sendScore(student, points, time) {
  * @param {string} number 
  */
 function checkIfEmpty(number) {
-    if (number == "") {
+    if (number === "") {
         studentIdentificationFailed("Het kan niet leeg zijn.");
     } else {
         checkStudent(number);
