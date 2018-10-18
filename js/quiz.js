@@ -871,4 +871,3 @@ function goToNextQuestion() {
 addButtonActions();
 showStartPage();
 boldButton(document.getElementById('button-start'));
-console.info("Misschien werkt het geheime commando... 😉");
