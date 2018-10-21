@@ -130,7 +130,7 @@ const QUIZ_VRAGEN = [
         vraag: "Welke bewering is waar?",
         antwoorden: {
             a: "We zijn bij de negende vraag en de maker heeft in de vraagtitel '- 1' vergeten.",
-            b: "We zijn bij de tiende vraag",
+            b: "We zijn bij de tiende vraag.",
             c: "We zijn bij de elfde vraag en de maker heeft in de vraagtitel '+ 1' vergeten.",
             d: "We zijn bij de twaalfde vraag en de maker heeft in de vraagtitel '+ 2' vergeten."
         },
