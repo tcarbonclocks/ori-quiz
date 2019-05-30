@@ -1,6 +1,4 @@
-# ori-quiz
-Windesheim Flevoland HBO ICT ORI klas 1 periode 1: ORI-quiz
+# ORI1: Quiz (NL)
+This is my first project made during the first year of HBO-ICT on Windesheim Flevoland.
 
-Dit is het eerste project van ORI. 
-In dit project wordt er enkel gebruik gemaakt van HTML/CSS/JS om een Single Page Application (SPA) te maken.
-Ook wordt er gebruik gemaakt van een Quiz-API van Windesheim om de score op te slaan.
+This is a simple quiz, using HTML/CSS/JS. You don't need anything special to run this.
